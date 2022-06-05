@@ -4,6 +4,7 @@ import model.state.stateBillet.StateBillet;
 import model.state.stateBillet.StateOuvert;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Billet {
 
@@ -19,6 +20,8 @@ public class Billet {
 
     private ArrayList<HistoriqueBillet> historiqueBillets;
 
+    private Date date;
+
 
     public Billet(String descriptionProbleme, Usager personneEnCharger, Usager demandeur, Category category, Gravity gravity) {
         this.descriptionProbleme = descriptionProbleme;
@@ -26,17 +29,11 @@ public class Billet {
         this.demandeur = demandeur;
         this.gravity = gravity;
         this.category = category;
-        // G
+
         this.id = ++ generateurBillet;
         this.etatBillet = new StateOuvert(this);
-    }
-
-    public static int getGenerateurBillet() {
-        return generateurBillet;
-    }
-
-    public static void setGenerateurBillet(int generateurBillet) {
-        Billet.generateurBillet = generateurBillet;
+        this.date = new Date();
+        this.historiqueBillets = new ArrayList<>();
     }
 
     public int getId() {

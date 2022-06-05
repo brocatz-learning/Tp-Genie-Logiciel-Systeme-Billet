@@ -17,6 +17,9 @@ public  class Usager {
     private String email;
     private Date dateCreation;
 
+    public Usager() {
+    }
+
 
     public Usager(UsagerDTO usagerDTO) {
         this.setDateCreation(usagerDTO.getDateCreation());
@@ -26,6 +29,16 @@ public  class Usager {
         this.setEmail(usagerDTO.getEmail());
         this.setPassword(usagerDTO.getPassword());
         this.setUsername(usagerDTO.getUsername());
+    }
+
+    public Usager(int id, String lastName, String firstName, String username, String password, String email, Date date) {
+        this.id = id;
+        this.nom = lastName;
+        this.prenom = firstName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.dateCreation = date;
     }
 
     public int getId() {
@@ -74,7 +87,6 @@ public  class Usager {
 
     // Les email
     public void setEmail(String email) {
-
         this.email = email.toLowerCase(Locale.ROOT);
     }
 
@@ -87,14 +99,17 @@ public  class Usager {
     }
 
     public UsagerDTO asUsagerTo() {
-        return new UsagerDTO(
-                this.getId(),
-                this.getNom(),
-                this.getPrenom(),
-                this.getUsername(),
-                this.getPassword(),
-                this.getEmail(),
-                this.getDateCreation()
-        );
+        UsagerDTO usagerDTO = new UsagerDTO();
+
+        usagerDTO.setId(this.id);
+        usagerDTO.setEmail(this.email);
+        usagerDTO.setNom(this.nom);
+        usagerDTO.setPrenom(this.prenom);
+        usagerDTO.setDateCreation(this.dateCreation);
+        usagerDTO.setPassword(this.password);
+        usagerDTO.setUsername(this.username);
+
+        return usagerDTO;
+
     }
 }

@@ -1,5 +1,8 @@
 package presentation;
 
+import Coordonnateur.Coordonnateur;
+import facade.FacadeApplication;
+import model.UsagerDTO;
 import utile.ConsoleColors;
 
 import java.util.Scanner;
@@ -7,6 +10,10 @@ import java.util.Scanner;
 public class Presentation {
 
     // Ne pas fermer les classe scanner
+
+    private static Scanner scanner = new Scanner(System.in);
+    private static FacadeApplication facadeApplication = new FacadeApplication();
+    private static Coordonnateur coordonnateur = new Coordonnateur();
     public static void main(String[] args) {
 
         afficherMenuProgrammePrincipale();
@@ -53,6 +60,9 @@ public class Presentation {
                     break;
             }
 
+            // On doit reinitialser la reponse pour le prochain tour
+            reponse = 0;
+
         }
 
 
@@ -61,13 +71,51 @@ public class Presentation {
 
 
     public static void afficherMenuCreationCompteUsager () {
+
         System.out.println("Menu creation d'un compte usager technique");
         System.out.println("----------------------------------------------");
+        System.out.println("Veuillez entrez le type d'usager technique : \n1 - Client  2 - Programmeur");
+
+        int choixUsagerTechnique = -1;
+        while (!ChoixUsagerTechnique.optionsUsagerTechnique.contains(choixUsagerTechnique)) {
+            if (!scanner.hasNextInt()) {
+                System.out.println( ConsoleColors.RED + "\nErreur veuillez entrez une valeur numeric entre option entre 1 et 2\n" + ConsoleColors.RESET);
+                scanner.nextLine();
+            } else {
+                choixUsagerTechnique = scanner.nextInt();
+            }
+
+            if(!ChoixUsagerTechnique.optionsUsagerTechnique.contains(choixUsagerTechnique)) {
+                System.out.println( ConsoleColors.RED + "\nErreur veuillez entrez une option entre 1 et 2\n" + ConsoleColors.RESET);
+            }
+        }
+
         System.out.println("Veuillez entrez le email de l'usager");
+        String email = scanner.next();
         System.out.println("Veuillez entrez le nom de l'usager");
+        String nom = scanner.next();
         System.out.println("Veuillez entrez le prenom de l'usager");
+        String prenom = scanner.next();
         System.out.println("Veuillez entrez le username de l'usager");
+        String username = scanner.next();
         System.out.println("Veuillez entrez le mot de passe de l'usager");
+        String password = scanner.next();
+
+        UsagerDTO usagerDTO = new UsagerDTO();
+        usagerDTO.setEmail(email);
+        usagerDTO.setNom(nom);
+        usagerDTO.setPrenom(prenom);
+        usagerDTO.setUsername(username);
+        usagerDTO.setPassword(password);
+
+        try {
+            coordonnateur.createUsager(usagerDTO, choixUsagerTechnique);
+            System.out.println(ConsoleColors.GREEN + "L'usager technique a w créé avec succès" + ConsoleColors.RESET);
+        } catch (Exception e) {
+            System.out.println(ConsoleColors.RED + e.getMessage() + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.RED + "L'usager technique n'a pas été créé" + ConsoleColors.RESET);
+        }
+
 
     }
 

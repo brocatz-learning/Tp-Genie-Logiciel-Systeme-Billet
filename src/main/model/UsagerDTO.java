@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class UsagerDTO {
 
@@ -12,14 +13,7 @@ public class UsagerDTO {
     private String email;
     private Date dateCreation;
 
-    public UsagerDTO(int id, String nom, String prenom, String username, String password, String email, Date dateCreation) {
-        this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.dateCreation = dateCreation;
+    public UsagerDTO() {
     }
 
     public int getId() {
@@ -76,5 +70,30 @@ public class UsagerDTO {
 
     public void setDateCreation(Date dateCreation) {
         this.dateCreation = dateCreation;
+    }
+
+    @Override
+    public String toString() {
+        return "UsagerDTO{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UsagerDTO usagerDTO = (UsagerDTO) o;
+        return id == usagerDTO.id && nom.equals(usagerDTO.nom) && prenom.equals(usagerDTO.prenom) && username.equals(usagerDTO.username) && password.equals(usagerDTO.password) && email.equals(usagerDTO.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nom, prenom, username, password, email);
     }
 }

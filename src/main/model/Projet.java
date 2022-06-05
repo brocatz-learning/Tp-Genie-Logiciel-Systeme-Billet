@@ -20,6 +20,7 @@ public class Projet {
         this.setNom(nom);
         this.setDescription(description);
         this.dateCreation = new Date();
+        this.listUsager = new TreeSet<Usager>();
 
     }
 
