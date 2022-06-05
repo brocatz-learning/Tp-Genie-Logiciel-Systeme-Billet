@@ -70,6 +70,7 @@ public class RegistreUsager {
         boolean isEmailDuplicated = listUsager.stream()
                 .anyMatch(element -> element.getEmail().equalsIgnoreCase(email));
         return isEmailDuplicated;
-
     }
+
+
 }

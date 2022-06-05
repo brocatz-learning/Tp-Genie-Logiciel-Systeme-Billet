@@ -98,7 +98,7 @@ public  class Usager {
         this.dateCreation = dateCreation;
     }
 
-    public UsagerDTO asUsagerTo() {
+    public UsagerDTO asDTO() {
         UsagerDTO usagerDTO = new UsagerDTO();
 
         usagerDTO.setId(this.id);

@@ -25,4 +25,12 @@ public class RegistreProjet {
     public boolean addProjet(Projet projet) {
         return listProjet.add(projet);
     }
+
+    public boolean verficationDuplicationProjetNom(String nomProjet) {
+        return listProjet.stream().anyMatch(projet -> projet.getNom().equals(nomProjet));
+    }
+
+    public int getSize() {
+        return listProjet.size();
+    }
 }

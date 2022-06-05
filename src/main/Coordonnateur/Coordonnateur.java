@@ -1,12 +1,10 @@
 package Coordonnateur;
 
+import exception.BilletNotCreatableExeception;
 import exception.ProjetNotValidExeception;
 import exception.UserNotVaildExeption;
 import facade.FacadeApplication;
-import model.FactoryUsagerTechnique;
-import model.ProjetDTO;
-import model.Usager;
-import model.UsagerDTO;
+import model.*;
 
 public class Coordonnateur {
 
@@ -36,12 +34,37 @@ public class Coordonnateur {
     public void createProjet(ProjetDTO projetDTO) throws ProjetNotValidExeception {
         ValidationProjet.validationProjetDTO(projetDTO);
 
+        boolean isProjetDuplicated = facadeApplication.isProjetDuplicated(projetDTO.getNom());
+        if (isProjetDuplicated) {
+            throw new ProjetNotValidExeception("Projet duplicated");
+        }
+
+
         boolean isProjetCree = facadeApplication.createProjet(projetDTO);
         if (isProjetCree == false) {
             throw new ProjetNotValidExeception("Erreur interne Projet non créé");
         }
     }
 
+    /**
+     * Verification avant de creer le billet
+     * Verification de l'existence d'un projet et d'un usager
+     *
+     * @param aucun
+     * @throws UserNotVaildExeption
+     */
+    public void verifyBilletCreatable() throws BilletNotCreatableExeception {
+        int nbUsager = facadeApplication.getListUsagerSize();
+        int nbProjet = facadeApplication.getListProjetSize();
+
+        if (nbUsager == 0 || nbProjet == 0) {
+            throw new BilletNotCreatableExeception("Au moins un projet et un usager doit exister");
+        }
+    }
+
+    public void createBillet (BilletDTO billetDTO) {
+
+    }
 
 
 }

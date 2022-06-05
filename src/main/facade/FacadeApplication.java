@@ -4,14 +4,13 @@ import exception.UserNotVaildExeption;
 import model.*;
 import persistence.RegistreProjet;
 import persistence.RegistreUsager;
+import persistence.ServicePeristence;
 
 public class FacadeApplication {
 
-    static {
-        registreUsager = RegistreUsager.getInstance();
-    }
-    private static RegistreUsager registreUsager = RegistreUsager.getInstance();
-    private static RegistreProjet registreProjet = RegistreProjet.getInstance();
+   private ServicePeristence servicePeristence = new ServicePeristence();
+
+
     public boolean createUsager (UsagerDTO usagerDTO, int choixResponse)  {
         Usager usager = FactoryUsagerTechnique.getUsagerFactory(choixResponse);
         usager.setUsername(usagerDTO.getUsername());
@@ -19,20 +18,44 @@ public class FacadeApplication {
         usager.setEmail(usagerDTO.getEmail());
         usager.setNom(usagerDTO.getNom());
         usager.setPrenom(usagerDTO.getPrenom());
-        boolean isUsagerCreer = registreUsager.addUsager(usager);
+        boolean isUsagerCreer = servicePeristence.createUsager(usager);
 
         return isUsagerCreer;
     }
 
     public boolean isEmailDuplicated(String email) {
-        return registreUsager.verficationDuplicationUsagerEmail(email);
+        return servicePeristence.isEmailDuplicated(email);
     }
 
     public boolean createProjet(ProjetDTO projetDTO) {
         Projet projet = new Projet(projetDTO.getNom(), projetDTO.getDescription());
         projet.setNom(projetDTO.getNom());
-        boolean isProjetAdded = registreProjet.addProjet(projet);
+        boolean isProjetAdded = servicePeristence.createProjet(projet);
 
         return isProjetAdded;
     }
+
+    public boolean createBillet(BilletDTO billetDTO) {
+        Billet billet =
+                new Billet(billetDTO.getDescriptionProbleme(), billetDTO.getPersonneEnCharger(), billetDTO.getDemandeur(), billetDTO.getDate());
+        boolean isBilletAdded = servicePeristence.createBillet(billet);
+
+        return isBilletAdded;
+    }
+
+    }
+
+    public boolean isProjetDuplicated(String nomProjet) {
+        return servicePeristence.isProjetNameDuplicated(nomProjet);
+    }
+
+    public int getListUsagerSize() {
+        return servicePeristence.getListUsagerSize();
+    }
+
+    public int getListProjetSize() {
+        return servicePeristence.getListProjetSize();
+    }
+
+
 }

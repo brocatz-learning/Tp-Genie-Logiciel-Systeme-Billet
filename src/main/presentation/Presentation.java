@@ -1,8 +1,10 @@
 package presentation;
 
 import Coordonnateur.Coordonnateur;
+import exception.BilletNotCreatableExeception;
 import exception.ProjetNotValidExeception;
 import facade.FacadeApplication;
+import model.BilletDTO;
 import model.ProjetDTO;
 import model.UsagerDTO;
 import utile.ConsoleColors;
@@ -14,7 +16,6 @@ public class Presentation {
     // Ne pas fermer les classe scanner
 
     private static Scanner scanner = new Scanner(System.in);
-    private static FacadeApplication facadeApplication = new FacadeApplication();
     private static Coordonnateur coordonnateur = new Coordonnateur();
     public static void main(String[] args) {
 
@@ -55,10 +56,12 @@ public class Presentation {
                 case 2:
                     break;
                 case 3:
+                    afficherMenuCreationProjet();
                     break;
                 case 4:
                     break;
                 case 5:
+
                     break;
             }
 
@@ -141,6 +144,43 @@ public class Presentation {
             System.out.println(ConsoleColors.RED + e.getMessage() + ConsoleColors.RESET);
             System.out.println(ConsoleColors.RED + "Le projet n'a pas été créé" + ConsoleColors.RESET);
         }
+
+    }
+
+    public static void afficherMenuCreationBillet() {
+
+        // On doit verifier si au moins un usager et ub projet et existe
+        boolean isBilletCreatable = true;
+
+        try {
+            coordonnateur.verifyBilletCreatable();
+        } catch (BilletNotCreatableExeception e) {
+            System.out.println(ConsoleColors.RED + e.getMessage() + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.RED + "Le billet n'a pas été créé" + ConsoleColors.RESET);
+            isBilletCreatable = false;
+        }
+
+        // Puisqu'il n'y a pas un projet et usager techique, on ne peut pas créer un billet
+        if (isBilletCreatable == false){
+            return;
+        }
+
+
+
+
+        System.out.println("Menu creation d'un billet");
+        System.out.println("--------------------------------------");
+
+        System.out.println("Veuillez entrez le nom du billet ");
+        String nomBillet = scanner.next();
+        System.out.println("Veuillez entrez la description du billet");
+        String descriptionBillet = scanner.next();
+        System.out.println("Veuillez le l'email du demandeur");
+        String emailDemandeur = scanner.next();
+
+
+
+
 
     }
 }

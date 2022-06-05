@@ -1,9 +1,9 @@
 package Coordonnateur;
 
+import exception.BilletNotCreatableExeception;
 import exception.ProjetNotValidExeception;
 import exception.UserNotVaildExeption;
-import model.ProjetDTO;
-import model.UsagerDTO;
+import model.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -85,6 +85,38 @@ class CoordonnateurTest {
             projetDTO.setDescription("");
             coordonnateur.createProjet(projetDTO);
         });
+    }
+
+    @Test
+    void testProjetDuplicate() {
+        ProjetDTO projetDTO = new ProjetDTO();
+        projetDTO.setNom("Projet1");
+        projetDTO.setDescription("Description1");
+        ProjetDTO projetDTO2 = new ProjetDTO();
+        projetDTO2.setNom("Projet1");
+        projetDTO2.setDescription("Description1");
+
+        assertThrows(ProjetNotValidExeception.class, () -> {
+            coordonnateur.createProjet(projetDTO);
+            coordonnateur.createProjet(projetDTO2);
+        });
+
+    }
+
+    @Test
+    void testBilletCreable () {
+        Billet billet1 = new Billet("Probleme d'affichage", new Usager(), new Usager(), Category.Feature,Gravity.Moyenne);
+        BilletDTO billetDTO1 = new BilletDTO();
+        billetDTO1.setDescriptionProbleme("Probleme d'affichage");
+        billetDTO1.setPersonneEnCharger(new UsagerDTO());
+        billetDTO1.setDemandeur(new UsagerDTO());
+        billetDTO1.setCategory(Category.Feature);
+        billetDTO1.setGravity(Gravity.Moyenne);
+
+        assertThrows(BilletNotCreatableExeception.class, () ->{
+            coordonnateur.createBillet(billetDTO1);
+        });
+
     }
 
 }
