@@ -1,8 +1,10 @@
 package Coordonnateur;
 
+import exception.ProjetNotValidExeception;
 import exception.UserNotVaildExeption;
 import facade.FacadeApplication;
 import model.FactoryUsagerTechnique;
+import model.ProjetDTO;
 import model.Usager;
 import model.UsagerDTO;
 
@@ -29,7 +31,15 @@ public class Coordonnateur {
         if (isUsagerCree == false) {
             throw new UserNotVaildExeption("Erreur interne Usager non créé");
         }
+    }
 
+    public void createProjet(ProjetDTO projetDTO) throws ProjetNotValidExeception {
+        ValidationProjet.validationProjetDTO(projetDTO);
+
+        boolean isProjetCree = facadeApplication.createProjet(projetDTO);
+        if (isProjetCree == false) {
+            throw new ProjetNotValidExeception("Erreur interne Projet non créé");
+        }
     }
 
 

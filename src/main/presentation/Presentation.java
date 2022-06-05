@@ -1,7 +1,9 @@
 package presentation;
 
 import Coordonnateur.Coordonnateur;
+import exception.ProjetNotValidExeception;
 import facade.FacadeApplication;
+import model.ProjetDTO;
 import model.UsagerDTO;
 import utile.ConsoleColors;
 
@@ -122,8 +124,23 @@ public class Presentation {
     public static void afficherMenuCreationProjet() {
         System.out.println("Menu creation d'un projet");
         System.out.println("--------------------------------------");
+
         System.out.println("Veuillez entrez le nom du projet ");
+        String nomProjet = scanner.next();
         System.out.println("Veuillez entrez la description du projet");
+        String descriptionProjet = scanner.next();
+
+        try {
+            ProjetDTO projetDTO = new ProjetDTO();
+            projetDTO.setNom(nomProjet);
+            projetDTO.setDescription(descriptionProjet);
+
+            coordonnateur.createProjet(projetDTO);
+            System.out.println(ConsoleColors.GREEN + "Le projet a w créé avec succès" + ConsoleColors.RESET);
+        } catch (ProjetNotValidExeception e) {
+            System.out.println(ConsoleColors.RED + e.getMessage() + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.RED + "Le projet n'a pas été créé" + ConsoleColors.RESET);
+        }
 
     }
 }

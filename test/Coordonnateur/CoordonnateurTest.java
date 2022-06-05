@@ -1,6 +1,8 @@
 package Coordonnateur;
 
+import exception.ProjetNotValidExeception;
 import exception.UserNotVaildExeption;
+import model.ProjetDTO;
 import model.UsagerDTO;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -73,6 +75,16 @@ class CoordonnateurTest {
 
         System.out.println(userNotVaildExeption.getMessage());
 
+    }
+
+    @Test
+    void testProjetNotValid() {
+        assertThrows(ProjetNotValidExeception.class, () -> {
+            ProjetDTO projetDTO = new ProjetDTO();
+            projetDTO.setNom("");
+            projetDTO.setDescription("");
+            coordonnateur.createProjet(projetDTO);
+        });
     }
 
 }

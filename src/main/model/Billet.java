@@ -5,6 +5,7 @@ import model.state.stateBillet.StateOuvert;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Billet {
 
@@ -18,7 +19,7 @@ public class Billet {
     private Gravity gravity;
     private Category category;
 
-    private ArrayList<HistoriqueBillet> historiqueBillets;
+    private List<HistoriqueBillet> historiqueBillets;
 
     private Date date;
 
@@ -90,5 +91,13 @@ public class Billet {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public List<HistoriqueBillet> getHistoriqueBillets() {
+        return this.historiqueBillets;
+    }
+
+    public void setHistoriqueBillets(List<HistoriqueBillet> historiqueBillets) {
+        this.historiqueBillets = historiqueBillets;
     }
 }

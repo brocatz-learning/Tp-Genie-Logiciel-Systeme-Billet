@@ -1,12 +1,9 @@
 package model;
 
-import java.io.PrintWriter;
 import java.util.Date;
 import java.util.TreeSet;
 
-public class Projet {
-
-    private static int projetGeneratedId = 0;
+public class ProjetDTO {
 
     private int id;
     private String nom;
@@ -15,18 +12,15 @@ public class Projet {
 
     private TreeSet<Usager> listUsager;
 
-
-    public Projet(String nom,String description) {
-        this.id = ++ Projet.projetGeneratedId;
-        this.setNom(nom);
-        this.setDescription(description);
-        this.dateCreation = new Date();
-        this.listUsager = new TreeSet<Usager>();
-
+    public ProjetDTO() {
     }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNom() {
@@ -41,6 +35,9 @@ public class Projet {
         return dateCreation;
     }
 
+    public void setDateCreation(Date dateCreation) {
+        this.dateCreation = dateCreation;
+    }
 
     public String getDescription() {
         return description;
@@ -50,12 +47,11 @@ public class Projet {
         this.description = description;
     }
 
-    public ProjetDTO asDTO() {
-        ProjetDTO projetDTO = new ProjetDTO();
-        projetDTO.setId(this.id);
-        projetDTO.setNom(this.nom);
-        projetDTO.setDateCreation(this.dateCreation);
-        projetDTO.setDescription(this.description);
-        return projetDTO;
+    public TreeSet<Usager> getListUsager() {
+        return listUsager;
+    }
+
+    public void setListUsager(TreeSet<Usager> listUsager) {
+        this.listUsager = listUsager;
     }
 }

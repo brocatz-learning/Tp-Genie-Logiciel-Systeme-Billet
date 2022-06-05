@@ -1,6 +1,10 @@
 package model.state.stateBillet;
 
 import model.Billet;
+import model.HistoriqueBillet;
+import model.Usager;
+
+import java.util.Date;
 
 public abstract class StateBillet {
     protected Billet billet;
@@ -15,21 +19,27 @@ public abstract class StateBillet {
 
     public abstract String getCurrentState();
 
-    public void fermerBillet() {
+    public void fermerBillet(Usager usager,String commentaire) {
         billet.setEtatBillet(new StateFermer(billet));
-
+        insertHistoriqueBillet(usager,commentaire,billet.getEtatBillet());
 
     }
-    public void ouvrirBillet() {
+    public void ouvrirBillet(Usager usager,String commentaire) {
         billet.setEtatBillet(new StateOuvert(billet));
+        insertHistoriqueBillet(usager,commentaire,billet.getEtatBillet());
     }
-    public  void mettreEnAttenteDeployement() {
-        billet.setEtatBillet(new StateEnAttenteDeploy(billet));
+    public  void mettreEnAttenteDeployement(Usager usager,String commentaire) {
+        insertHistoriqueBillet(usager,commentaire,billet.getEtatBillet());
     }
-    public void mettreEnTravailEnCours() {
-        billet.setEtatBillet(new StateTravailEnCours(billet));
+    public void mettreEnTravailEnCours(Usager usager,String commentaire) {
+        insertHistoriqueBillet(usager,commentaire,billet.getEtatBillet());
     }
 
+
+    private void insertHistoriqueBillet(Usager usager, String commentaire,StateBillet stateBillet) {
+        HistoriqueBillet historiqueBillet = new HistoriqueBillet(billet.getEtatBillet(), usager, commentaire, new Date());
+        billet.getHistoriqueBillets().add(historiqueBillet);
+    }
 
 
 
