@@ -36,13 +36,19 @@ public class FacadeApplication {
     }
 
     public boolean createBillet(BilletDTO billetDTO) {
-        Billet billet =
-                new Billet(billetDTO.getDescriptionProbleme(), billetDTO.getPersonneEnCharger(), billetDTO.getDemandeur(), billetDTO.getDate());
-        boolean isBilletAdded = servicePeristence.createBillet(billet);
 
-        return isBilletAdded;
-    }
 
+//        Billet billet =
+//                new Billet(
+//                        billetDTO.getDescriptionProbleme(),
+//                        findByEmail(billetDTO.getPersonneEnCharger().getEmail()),
+//                        billetDTO.getDemandeur().getE,
+//                        billetDTO.getCategory(),
+//                        billetDTO.getGravity());
+
+        //boolean isBilletAdded = servicePeristence.createBillet(billet);
+
+        return false;
     }
 
     public boolean isProjetDuplicated(String nomProjet) {
@@ -55,6 +61,11 @@ public class FacadeApplication {
 
     public int getListProjetSize() {
         return servicePeristence.getListProjetSize();
+    }
+
+
+    public boolean isEmailInEnRegistre(String email) {
+        return servicePeristence.isEmailInEnRegistre(email);
     }
 
 

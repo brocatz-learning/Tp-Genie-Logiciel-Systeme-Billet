@@ -165,6 +165,8 @@ public class Presentation {
             return;
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -177,6 +179,53 @@ public class Presentation {
         String descriptionBillet = scanner.next();
         System.out.println("Veuillez le l'email du demandeur");
         String emailDemandeur = scanner.next();
+        System.out.println("Veuillez entrez le nom du demandeur");
+        String emailEnCharge = scanner.next();
+
+        int gravity = -1;
+
+        while(!ChoixGravity.optionsGravity.contains(gravity)) {
+
+            System.out.println("Veuillez entrez la gravité du billet : \n1 - Faible  2 - Moyen  3 - Fort");
+            if (!scanner.hasNextInt()) {
+                System.out.println( ConsoleColors.RED + "\nErreur veuillez entrez une valeur numeric entre option entre 1 et 3\n" + ConsoleColors.RESET);
+                scanner.nextLine();
+            } else {
+                gravity = scanner.nextInt();
+            }
+
+            if(!ChoixGravity.optionsGravity.contains(gravity)) {
+                System.out.println( ConsoleColors.RED + "\nErreur veuillez entrez une option entre 1 et 3\n" + ConsoleColors.RESET);
+            }
+        }
+
+        try {
+
+            UsagerDTO usagerdemandeur = new UsagerDTO();
+            UsagerDTO usagerenCharge = new UsagerDTO();
+
+            usagerdemandeur.setEmail(emailDemandeur);
+            usagerenCharge.setEmail(emailEnCharge);
+
+
+            BilletDTO billetDTO = new BilletDTO();
+            billetDTO.setDescriptionProbleme(nomBillet);
+            billetDTO.setPersonneEnCharger(usagerenCharge);
+            billetDTO.setDemandeur(usagerdemandeur);
+
+
+            coordonnateur.createBillet(billetDTO);
+            System.out.println(ConsoleColors.GREEN + "Le billet a w créé avec succès" + ConsoleColors.RESET);
+        } catch (Exception e) {
+            System.out.println(ConsoleColors.RED + e.getMessage() + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.RED + "Le billet n'a pas été créé" + ConsoleColors.RESET);
+        }
+
+
+
+
+
+
 
 
 

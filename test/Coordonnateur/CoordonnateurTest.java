@@ -104,7 +104,7 @@ class CoordonnateurTest {
     }
 
     @Test
-    void testBilletCreable () {
+    void testBilletNotCreatable () {
         Billet billet1 = new Billet("Probleme d'affichage", new Usager(), new Usager(), Category.Feature,Gravity.Moyenne);
         BilletDTO billetDTO1 = new BilletDTO();
         billetDTO1.setDescriptionProbleme("Probleme d'affichage");
@@ -113,9 +113,11 @@ class CoordonnateurTest {
         billetDTO1.setCategory(Category.Feature);
         billetDTO1.setGravity(Gravity.Moyenne);
 
-        assertThrows(BilletNotCreatableExeception.class, () ->{
+        Exception exception = assertThrows(Exception.class, () ->{
             coordonnateur.createBillet(billetDTO1);
         });
+
+        System.out.println(exception.getMessage());
 
     }
 

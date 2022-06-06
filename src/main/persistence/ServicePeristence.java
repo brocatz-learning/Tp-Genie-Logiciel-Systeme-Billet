@@ -1,5 +1,6 @@
 package persistence;
 
+import model.Billet;
 import model.Projet;
 import model.Usager;
 
@@ -34,6 +35,15 @@ public class ServicePeristence {
     public int getListProjetSize() {
         return registreProjet.getSize();
     }
+
+    public boolean isEmailInEnRegistre (String email) {
+        return registreUsager.isEmailInRegistre(email);
+    }
+
+    public boolean createBillet(Billet billet) {
+        return registreBillet.addBillet(billet);
+    }
+
 
 }
 

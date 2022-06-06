@@ -4,6 +4,8 @@ import exception.UserNotVaildExeption;
 import model.Usager;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 // Singleton
 public class RegistreUsager {
@@ -70,6 +72,14 @@ public class RegistreUsager {
         boolean isEmailDuplicated = listUsager.stream()
                 .anyMatch(element -> element.getEmail().equalsIgnoreCase(email));
         return isEmailDuplicated;
+    }
+
+    public boolean isEmailInRegistre(String email) {
+        List<Usager> listUsagerFiltre = listUsager.stream()
+                .filter(u -> u.getEmail().equalsIgnoreCase(email))
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        return listUsagerFiltre.size() > 0 ? true : false;
     }
 
 

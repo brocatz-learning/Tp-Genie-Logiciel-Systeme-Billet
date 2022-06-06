@@ -32,6 +32,10 @@ public class RegistreBillet {
         return this.listBillet;
     }
 
+    public boolean addBillet(Billet billet) {
+        return this.listBillet.add(billet);
+    }
+
 
     public static List<Billet> filtre (Filtre filtre) {
         List<Billet> listARetourner = new ArrayList<>();

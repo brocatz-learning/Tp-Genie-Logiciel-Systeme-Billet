@@ -62,8 +62,24 @@ public class Coordonnateur {
         }
     }
 
-    public void createBillet (BilletDTO billetDTO) {
+    public void createBillet (BilletDTO billetDTO) throws UserNotVaildExeption, BilletNotCreatableExeception {
 
+        boolean isDemandeurExist = facadeApplication.isEmailInEnRegistre(billetDTO.getDemandeur().getEmail());
+        boolean isPersonneEnChargerExist = facadeApplication.isEmailInEnRegistre(billetDTO.getPersonneEnCharger().getEmail());
+
+        if (!isDemandeurExist) {
+            throw new UserNotVaildExeption("L'email du demandeur n'existe pas");
+        }
+
+        if (!isPersonneEnChargerExist) {
+            throw new UserNotVaildExeption("L'email de la  personne en charge n'existe pas");
+        }
+
+
+        boolean isBilletCreated = facadeApplication.createBillet(billetDTO);
+        if (isBilletCreated == false) {
+            throw new BilletNotCreatableExeception("Erreur interne Billet non créé");
+        }
     }
 
 
