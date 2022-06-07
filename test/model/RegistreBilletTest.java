@@ -23,13 +23,13 @@ class RegistreBilletTest {
     static void beforeAll() {
         registreBillet = RegistreBillet.getInstance();
 
-        Billet billet = new Billet("Probleme d'affichage", new Usager(), new Usager(),Category.Bug,Gravity.Faible);
-        Billet billet1 = new Billet("Probleme d'affichage", new Usager(), new Usager(),Category.Feature,Gravity.Moyenne);
-        Billet billet2 = new Billet("Probleme d'affichage", new Usager(), new Usager(),Category.Support,Gravity.Elevee);
-        Billet billet3 = new Billet("Probleme d'affichage", new Usager(), new Usager(),Category.Bug,Gravity.Moyenne);
-        Billet billet4 = new Billet("Probleme d'affichage", new Usager(), new Usager(),Category.Bug,Gravity.Elevee);
-        Billet billet5 = new Billet("Probleme d'affichage", new Usager(), new Usager(),Category.Feature,Gravity.Faible);
-        Billet billet6 = new Billet("Probleme d'affichage", new Usager(), new Usager(),Category.Support,Gravity.Faible);
+        Billet billet = new Billet("Probleme d'affichage", new Usager(), new Usager(),"Bug",Gravity.Faible);
+        Billet billet1 = new Billet("Probleme d'affichage", new Usager(), new Usager(),"Bug",Gravity.Moyenne);
+        Billet billet2 = new Billet("Probleme d'affichage", new Usager(), new Usager(),"Bug",Gravity.Elevee);
+        Billet billet3 = new Billet("Probleme d'affichage", new Usager(), new Usager(),"Bug",Gravity.Moyenne);
+        Billet billet4 = new Billet("Probleme d'affichage", new Usager(), new Usager(),"Bug",Gravity.Elevee);
+        Billet billet5 = new Billet("Probleme d'affichage", new Usager(), new Usager(),"Bug",Gravity.Faible);
+        Billet billet6 = new Billet("Probleme d'affichage", new Usager(), new Usager(),"Bug",Gravity.Faible);
 
 
         billet1.setEtatBillet(new StateTravailEnCours(billet));
@@ -40,7 +40,7 @@ class RegistreBilletTest {
         billet6.setEtatBillet(new StateFermer(billet6));
 
         registreBillet.getListBillet().addAll(
-                List.of(billet,billet1,billet2,billet3,billet4,billet5,billet6)
+                of(billet,billet1,billet2,billet3,billet4,billet5,billet6)
         );
 
 

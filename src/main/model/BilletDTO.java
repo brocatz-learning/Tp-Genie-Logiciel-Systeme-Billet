@@ -13,7 +13,7 @@ public class BilletDTO {
     private UsagerDTO demandeur;
     private StateBillet etatBillet;
     private Gravity gravity;
-    private Category category;
+    private String category;
 
     private List<HistoriqueBillet> historiqueBillets;
 
@@ -70,11 +70,11 @@ public class BilletDTO {
         this.gravity = gravity;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 

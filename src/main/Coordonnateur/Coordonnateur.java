@@ -1,8 +1,7 @@
 package Coordonnateur;
 
-import exception.BilletNotCreatableExeception;
-import exception.ProjetNotValidExeception;
-import exception.UserNotVaildExeption;
+import exception.*;
+;
 import facade.FacadeApplication;
 import model.*;
 
@@ -79,6 +78,32 @@ public class Coordonnateur {
         boolean isBilletCreated = facadeApplication.createBillet(billetDTO);
         if (isBilletCreated == false) {
             throw new BilletNotCreatableExeception("Erreur interne Billet non créé");
+        }
+    }
+
+    public void createCategorie(String category) throws CategoryAlreadyExistExeception {
+        category = category.toLowerCase();
+        boolean isCategory = facadeApplication.createCategorie(category);
+
+        if (isCategory == false) {
+            throw new CategoryAlreadyExistExeception("Categorie déjà existante");
+        }
+    }
+
+    public void createAssignation( String nomProjet,String emailUsagerTechnique) throws ProjetNotAssignableToUserExeception {
+        boolean isEmailValid = facadeApplication.isEmailInEnRegistre(emailUsagerTechnique);
+        boolean isProjetValid = facadeApplication.isProjetDuplicated(nomProjet);
+        if (isEmailValid == false) {
+            throw new ProjetNotAssignableToUserExeception("Projet non assignable à l'usager : email non valide");
+        }
+
+        if (isProjetValid == false) {
+            throw new ProjetNotAssignableToUserExeception("Projet non assignable à l'usager : nom projet non valide");
+        }
+
+        boolean isAssignationCreated = facadeApplication.createAssignation(nomProjet, emailUsagerTechnique);
+        if (isAssignationCreated == false) {
+            throw new ProjetNotAssignableToUserExeception("Erreur interne Assignation non créé");
         }
     }
 

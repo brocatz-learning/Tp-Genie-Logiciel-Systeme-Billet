@@ -32,6 +32,7 @@ public class RegistreUsager {
 
         if (validationChampUsager(usager) ) {
             isUserAdded = true;
+            usager.setId(listUsager.size() + 1);
             this.listUsager.add(usager);
         }
 
@@ -80,6 +81,18 @@ public class RegistreUsager {
                 .collect(Collectors.toCollection(ArrayList::new));
 
         return listUsagerFiltre.size() > 0 ? true : false;
+    }
+
+    public Usager findByEmail(String email) {
+        List<Usager> listUsagerFiltre = listUsager.stream()
+                .filter(u -> u.getEmail().equalsIgnoreCase(email))
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        if (listUsagerFiltre.size() > 0) {
+            return listUsagerFiltre.get(0);
+        } else {
+            return null;
+        }
     }
 
 

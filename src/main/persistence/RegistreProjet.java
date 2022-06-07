@@ -26,6 +26,13 @@ public class RegistreProjet {
         return listProjet.add(projet);
     }
 
+    public Projet findByNom(String nomProjet) {
+        Projet projet = listProjet
+                .stream()
+                .filter(p -> p.getNom().equals(nomProjet)).findFirst().orElse(null);
+        return projet;
+    }
+
     public boolean verficationDuplicationProjetNom(String nomProjet) {
         return listProjet.stream().anyMatch(projet -> projet.getNom().equals(nomProjet));
     }

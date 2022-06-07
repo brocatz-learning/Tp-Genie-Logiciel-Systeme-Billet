@@ -17,14 +17,14 @@ public class Billet {
     private Usager demandeur;
     private StateBillet etatBillet;
     private Gravity gravity;
-    private Category category;
+    private String category;
 
     private List<HistoriqueBillet> historiqueBillets;
 
     private Date date;
 
 
-    public Billet(String descriptionProbleme, Usager personneEnCharger, Usager demandeur, Category category, Gravity gravity) {
+    public Billet(String descriptionProbleme, Usager personneEnCharger, Usager demandeur, String category, Gravity gravity) {
         this.descriptionProbleme = descriptionProbleme;
         this.personneEnCharger = personneEnCharger;
         this.demandeur = demandeur;
@@ -85,11 +85,11 @@ public class Billet {
         this.gravity = gravity;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 

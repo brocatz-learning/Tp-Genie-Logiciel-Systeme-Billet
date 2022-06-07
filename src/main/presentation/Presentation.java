@@ -2,6 +2,8 @@ package presentation;
 
 import Coordonnateur.Coordonnateur;
 import exception.BilletNotCreatableExeception;
+import exception.CategoryAlreadyExistExeception;
+import exception.ProjetNotAssignableToUserExeception;
 import exception.ProjetNotValidExeception;
 import facade.FacadeApplication;
 import model.BilletDTO;
@@ -30,14 +32,19 @@ public class Presentation {
 
         while (reponse != -1) {
 
-            System.out.println("Bonjour Bienvenue dans le programme de gestion de billet");
+            System.out.println("\nBonjour Bienvenue dans le programme de gestion de billet");
             System.out.println("Veuillez choisir une option dans la liste");
             System.out.println("-----------------------------------");
             System.out.println("1: Creer un compte usager technique");
-            System.out.println("2: Assigner un usager technique a un billet");
-            System.out.println("3: Creer un projet");
-            System.out.println("4: Assigner un billet a usager technique");
+            System.out.println("2: Creer un projet");
+            System.out.println("3: Assigner un usager technique a un projet");
+            System.out.println("4: Creer une categorie");
             System.out.println("5: Creer un billet");
+            System.out.println("6: Assigner un billet a un usager technique");
+            System.out.println("7: Changer l'etat d'un billet");
+            System.out.println("8: Consulter la liste des billets filtres");
+            System.out.println("9: Consulter la liste des billets non par id");
+
             System.out.println("0: Quitter le programme");
 
             if (!scanner.hasNextInt()) {
@@ -54,11 +61,13 @@ public class Presentation {
                     afficherMenuCreationCompteUsager();
                     break;
                 case 2:
-                    break;
-                case 3:
                     afficherMenuCreationProjet();
                     break;
+                case 3:
+                    afficherMenuAssignationUsagerTechniqueProjet();
+                    break;
                 case 4:
+                    afficherMenuCreationCategorie();
                     break;
                 case 5:
 
@@ -75,6 +84,8 @@ public class Presentation {
     }
 
 
+    // 1- TODO Menu Creation Compte Usager
+    // Completed
     public static void afficherMenuCreationCompteUsager () {
 
         System.out.println("Menu creation d'un compte usager technique");
@@ -124,6 +135,8 @@ public class Presentation {
 
     }
 
+    // 2 TODO Menu Creation Projet
+    // Completed
     public static void afficherMenuCreationProjet() {
         System.out.println("Menu creation d'un projet");
         System.out.println("--------------------------------------");
@@ -147,6 +160,54 @@ public class Presentation {
 
     }
 
+    // 3 Assigner un usager technique a un projet
+
+    public static void afficherMenuAssignationUsagerTechniqueProjet() {
+
+        // On doit verifier que l'usager technique existe et qu'un projet existe
+
+        boolean isAssignationDoable = false;
+
+
+        System.out.println("Menu assignation d'un usager technique a un projet");
+        System.out.println("--------------------------------------");
+
+        System.out.println("Veuillez entrez le nom du projet ");
+        String nomProjet = scanner.next();
+        System.out.println("Veuillez entrez l'email de l'usager technique");
+        String emailUsagerTechique = scanner.next();
+
+        try {
+            coordonnateur.createAssignation(nomProjet, emailUsagerTechique);
+            System.out.println(ConsoleColors.GREEN + "L'usager technique a w assigné avec succès" + ConsoleColors.RESET);
+        } catch (ProjetNotAssignableToUserExeception e) {
+            System.out.println(ConsoleColors.RED + e.getMessage() + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.RED + "L'usager technique n'a pas été assigné" + ConsoleColors.RESET);
+        }
+
+    }
+
+    // 4 TODO Menu Creation Categorie
+    // Completed
+    public static void afficherMenuCreationCategorie() {
+        System.out.println("Menu creation d'une categorie");
+        System.out.println("--------------------------------------");
+
+        System.out.println("Veuillez entrez le nom de la nouvelle categorie ");
+        String nomCategorie = scanner.next();
+
+        try {
+            coordonnateur.createCategorie(nomCategorie);
+            System.out.println(ConsoleColors.GREEN + "La categorie " + nomCategorie + "a w créé avec succès" + ConsoleColors.RESET);
+        } catch (CategoryAlreadyExistExeception e) {
+            System.out.println(ConsoleColors.RED + e.getMessage() + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.RED + "La categorie n'a pas été créé" + ConsoleColors.RESET);
+        }
+
+
+    }
+
+    // 6 TODO Menu Creation Billet
     public static void afficherMenuCreationBillet() {
 
         // On doit verifier si au moins un usager et ub projet et existe

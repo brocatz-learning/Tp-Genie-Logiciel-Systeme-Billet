@@ -69,4 +69,11 @@ public class FacadeApplication {
     }
 
 
+    public boolean createCategorie(String category) {
+        return servicePeristence.createCategorie(category);
+    }
+
+    public boolean createAssignation(String  nomProjet, String emailUsager) {
+        return servicePeristence.createAssignation(nomProjet, emailUsager);
+    }
 }

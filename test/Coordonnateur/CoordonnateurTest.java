@@ -1,6 +1,7 @@
 package Coordonnateur;
 
 import exception.BilletNotCreatableExeception;
+import exception.CategoryAlreadyExistExeception;
 import exception.ProjetNotValidExeception;
 import exception.UserNotVaildExeption;
 import model.*;
@@ -51,7 +52,7 @@ class CoordonnateurTest {
 //    }
 
     @Test
-    void testcreateUsagerDuplicateEmail() {
+    void testCreateUsagerDuplicateEmail() {
         UsagerDTO usagerDTO = new UsagerDTO();
         usagerDTO.setId(1);
         usagerDTO.setEmail("super@gmail.com");
@@ -105,12 +106,12 @@ class CoordonnateurTest {
 
     @Test
     void testBilletNotCreatable () {
-        Billet billet1 = new Billet("Probleme d'affichage", new Usager(), new Usager(), Category.Feature,Gravity.Moyenne);
+        Billet billet1 = new Billet("Probleme d'affichage", new Usager(), new Usager(), "Bug",Gravity.Moyenne);
         BilletDTO billetDTO1 = new BilletDTO();
         billetDTO1.setDescriptionProbleme("Probleme d'affichage");
         billetDTO1.setPersonneEnCharger(new UsagerDTO());
         billetDTO1.setDemandeur(new UsagerDTO());
-        billetDTO1.setCategory(Category.Feature);
+        billetDTO1.setCategory("Bug");
         billetDTO1.setGravity(Gravity.Moyenne);
 
         Exception exception = assertThrows(Exception.class, () ->{
@@ -121,4 +122,21 @@ class CoordonnateurTest {
 
     }
 
+    @Test
+    void createCategorie() {
+        String categorie = "Gestion";
+
+        assertDoesNotThrow(() -> {
+            coordonnateur.createCategorie(categorie);
+        });
+    }
+
+    @Test
+    void createCategorieExeception() {
+        String categorie = "Bug";
+
+        assertThrows(CategoryAlreadyExistExeception.class, () -> {
+                coordonnateur.createCategorie(categorie);
+        });
+    }
 }

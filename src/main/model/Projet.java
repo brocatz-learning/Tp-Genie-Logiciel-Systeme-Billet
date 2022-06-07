@@ -50,6 +50,10 @@ public class Projet {
         this.description = description;
     }
 
+    public boolean addUsager(Usager usager) {
+        return this.listUsager.add(usager);
+    }
+
     public ProjetDTO asDTO() {
         ProjetDTO projetDTO = new ProjetDTO();
         projetDTO.setId(this.id);

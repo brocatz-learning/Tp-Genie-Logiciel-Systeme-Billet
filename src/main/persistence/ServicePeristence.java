@@ -10,6 +10,7 @@ public class ServicePeristence {
     private static RegistreProjet registreProjet = RegistreProjet.getInstance();
 
     private static RegistreBillet registreBillet = RegistreBillet.getInstance();
+    private static RegistreCategorie registreCategorie = RegistreCategorie.getInstance();
 
 
     public boolean createUsager(Usager usager) {
@@ -44,7 +45,30 @@ public class ServicePeristence {
         return registreBillet.addBillet(billet);
     }
 
+    public boolean isCateogrieInRegistre(String categorie) {
+        return registreCategorie.isCategorieInRegistre(categorie);
+    }
 
+
+    public boolean createCategorie(String category) {
+        return registreCategorie.addCategorie(category);
+    }
+
+    public Usager findByEmail(String email) {
+        return registreUsager.findByEmail(email);
+    }
+
+
+    public boolean createAssignation(String nomProjet, String emailUsager) {
+        Usager usager = registreUsager.findByEmail(emailUsager);
+        Projet projet = registreProjet.findByNom(nomProjet);
+
+        if (usager == null || projet == null) {
+            return false;
+        }
+
+        return projet.addUsager(usager);
+    }
 }
 
 

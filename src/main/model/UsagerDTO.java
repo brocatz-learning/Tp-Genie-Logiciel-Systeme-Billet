@@ -2,6 +2,7 @@ package model;
 
 import java.util.Date;
 import java.util.Objects;
+import java.lang.String;
 
 public class UsagerDTO {
 
@@ -15,6 +16,8 @@ public class UsagerDTO {
 
     public UsagerDTO() {
     }
+
+
 
     public int getId() {
         return id;
