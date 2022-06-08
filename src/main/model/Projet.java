@@ -15,6 +15,16 @@ public class Projet {
 
     private TreeSet<Usager> listUsager;
 
+    public Projet () {}
+    public Projet(ProjetDTO projetDTO) {
+        this.setId(projetDTO.getId());
+        this.setNom(projetDTO.getNom());
+        this.setDateCreation(projetDTO.getDateCreation());
+        this.setDescription(projetDTO.getDescription());
+        this.setListUsager(projetDTO.getListUsager());
+    }
+
+
 
     public Projet(String nom,String description) {
         this.id = ++ Projet.projetGeneratedId;
@@ -27,6 +37,9 @@ public class Projet {
 
     public int getId() {
         return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNom() {
@@ -41,6 +54,10 @@ public class Projet {
         return dateCreation;
     }
 
+    public void setDateCreation(Date dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
 
     public String getDescription() {
         return description;
@@ -48,6 +65,14 @@ public class Projet {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public TreeSet<Usager> getListUsager() {
+        return listUsager;
+    }
+
+    public void setListUsager(TreeSet<Usager> listUsager) {
+        this.listUsager = listUsager;
     }
 
     public boolean addUsager(Usager usager) {

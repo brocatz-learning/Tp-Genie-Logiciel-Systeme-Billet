@@ -19,6 +19,8 @@ public class BilletDTO {
 
     private Date date;
 
+    private ProjetDTO projet;
+
     public BilletDTO () {
     }
 
@@ -92,5 +94,13 @@ public class BilletDTO {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public ProjetDTO getProjet() {
+        return projet;
+    }
+
+    public void setProjet(ProjetDTO projet) {
+        this.projet = projet;
     }
 }

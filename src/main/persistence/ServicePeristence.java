@@ -1,8 +1,11 @@
 package persistence;
 
 import model.Billet;
+import model.Filtre;
 import model.Projet;
 import model.Usager;
+
+import java.util.List;
 
 public class ServicePeristence {
 
@@ -42,6 +45,16 @@ public class ServicePeristence {
     }
 
     public boolean createBillet(Billet billet) {
+
+        Usager personneEnCharge = registreUsager.findByEmail(billet.getPersonneEnCharger().getEmail());
+        Usager demandeur = registreUsager.findByEmail(billet.getDemandeur().getEmail());
+        Projet projet = registreProjet.findByNom(billet.getProjet().getNom());
+
+        if (personneEnCharge == null || demandeur == null || projet == null) {
+            return false;
+        }
+
+
         return registreBillet.addBillet(billet);
     }
 
@@ -68,6 +81,14 @@ public class ServicePeristence {
         }
 
         return projet.addUsager(usager);
+    }
+
+
+
+    public List<Billet> consulterListeBillet(Filtre filtre, int choix) {
+
+
+        return null;
     }
 }
 

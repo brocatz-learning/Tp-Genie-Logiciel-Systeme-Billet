@@ -3,7 +3,7 @@ package model;
 import java.util.Date;
 import java.util.Locale;
 
-public  class Usager {
+public  class Usager implements Comparable<Usager> {
 
     public static String REGEX_EMAIL = "^[A-Za-z0-9+_.-]+@(.+)$";
     public static String REGEX_NOM = "";
@@ -110,6 +110,18 @@ public  class Usager {
         usagerDTO.setUsername(this.username);
 
         return usagerDTO;
+
+    }
+
+    @Override
+    public int compareTo(Usager o) {
+        if (this.id > o.id) {
+            return 1;
+        } else if (this.id < o.id) {
+            return -1;
+        } else {
+            return 0;
+        }
 
     }
 }

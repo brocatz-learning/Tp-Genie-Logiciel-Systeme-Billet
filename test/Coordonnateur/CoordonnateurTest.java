@@ -106,7 +106,7 @@ class CoordonnateurTest {
 
     @Test
     void testBilletNotCreatable () {
-        Billet billet1 = new Billet("Probleme d'affichage", new Usager(), new Usager(), "Bug",Gravity.Moyenne);
+        Billet billet1 = new Billet("Probleme d'affichage", new Usager(), new Usager(), "Bug",Gravity.Moyenne, new Projet());
         BilletDTO billetDTO1 = new BilletDTO();
         billetDTO1.setDescriptionProbleme("Probleme d'affichage");
         billetDTO1.setPersonneEnCharger(new UsagerDTO());
@@ -138,5 +138,10 @@ class CoordonnateurTest {
         assertThrows(CategoryAlreadyExistExeception.class, () -> {
                 coordonnateur.createCategorie(categorie);
         });
+    }
+
+
+    @Test
+    void createBillet() {
     }
 }

@@ -23,6 +23,8 @@ public class RegistreProjet {
     }
 
     public boolean addProjet(Projet projet) {
+
+        projet.setId(listProjet.size() + 1);
         return listProjet.add(projet);
     }
 
@@ -34,7 +36,7 @@ public class RegistreProjet {
     }
 
     public boolean verficationDuplicationProjetNom(String nomProjet) {
-        return listProjet.stream().anyMatch(projet -> projet.getNom().equals(nomProjet));
+        return listProjet.stream().anyMatch(projet -> projet.getNom().toLowerCase().equalsIgnoreCase(nomProjet));
     }
 
     public int getSize() {

@@ -7,11 +7,13 @@ import exception.ProjetNotAssignableToUserExeception;
 import exception.ProjetNotValidExeception;
 import facade.FacadeApplication;
 import model.BilletDTO;
+import model.Filtre;
 import model.ProjetDTO;
 import model.UsagerDTO;
 import utile.ConsoleColors;
 
 import java.util.Scanner;
+import java.util.logging.Filter;
 
 public class Presentation {
 
@@ -70,7 +72,7 @@ public class Presentation {
                     afficherMenuCreationCategorie();
                     break;
                 case 5:
-
+                    afficherMenuCreationBillet();
                     break;
             }
 
@@ -179,10 +181,10 @@ public class Presentation {
 
         try {
             coordonnateur.createAssignation(nomProjet, emailUsagerTechique);
-            System.out.println(ConsoleColors.GREEN + "L'usager technique a w assigné avec succès" + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.GREEN + "L'assignation a ete effectue avec succès" + ConsoleColors.RESET);
         } catch (ProjetNotAssignableToUserExeception e) {
             System.out.println(ConsoleColors.RED + e.getMessage() + ConsoleColors.RESET);
-            System.out.println(ConsoleColors.RED + "L'usager technique n'a pas été assigné" + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.RED + "L'assignation n'a pas été effectue" + ConsoleColors.RESET);
         }
 
     }
@@ -238,10 +240,12 @@ public class Presentation {
         String nomBillet = scanner.next();
         System.out.println("Veuillez entrez la description du billet");
         String descriptionBillet = scanner.next();
-        System.out.println("Veuillez le l'email du demandeur");
+        System.out.println("Veuillez l'email du demandeur");
         String emailDemandeur = scanner.next();
-        System.out.println("Veuillez entrez le nom du demandeur");
+        System.out.println("Veuillez l'email de la personne en charge");
         String emailEnCharge = scanner.next();
+        System.out.println("Veuillez entrez le nom du projet");
+        String nomProjet = scanner.next();
 
         int gravity = -1;
 
@@ -262,17 +266,21 @@ public class Presentation {
 
         try {
 
+            ProjetDTO projetDTO = new ProjetDTO();
             UsagerDTO usagerdemandeur = new UsagerDTO();
             UsagerDTO usagerenCharge = new UsagerDTO();
 
             usagerdemandeur.setEmail(emailDemandeur);
             usagerenCharge.setEmail(emailEnCharge);
 
+            projetDTO.setNom(nomProjet);
+
 
             BilletDTO billetDTO = new BilletDTO();
             billetDTO.setDescriptionProbleme(nomBillet);
             billetDTO.setPersonneEnCharger(usagerenCharge);
             billetDTO.setDemandeur(usagerdemandeur);
+            billetDTO.setProjet(projetDTO);
 
 
             coordonnateur.createBillet(billetDTO);
@@ -292,5 +300,45 @@ public class Presentation {
 
 
 
+    }
+
+    // 8 Consulter la liste des billets
+    public static void afficherMenuConsulterListeBillet () {
+        System.out.println("Menu consulter la liste des billets");
+        System.out.println("--------------------------------------");
+
+
+        System.out.println("Veuillez entrez le filtre souhaiter");
+        System.out.println("1 - Date d'ouverture");
+        System.out.println("2 - Demandeeur");
+        System.out.println("3 - Etat");
+        System.out.println("4 - Personne en charge");
+        System.out.println("5 - Gravité");
+        System.out.println("6 - Projet");
+        System.out.println("7 - Categorie");
+
+        int choix = -1;
+
+        while(!ChoixFiltreBillet.optionsFiltre.contains(choix)) {
+            if (!scanner.hasNextInt()) {
+                System.out.println( ConsoleColors.RED + "\nErreur veuillez entrez une valeur numeric entre option entre 1 et 7\n" + ConsoleColors.RESET);
+                scanner.nextLine();
+            } else {
+                choix = scanner.nextInt();
+            }
+
+            if(!ChoixFiltreBillet.optionsFiltre.contains(choix)) {
+                System.out.println( ConsoleColors.RED + "\nErreur veuillez entrez une option entre 1 et 7\n" + ConsoleColors.RESET);
+            }
+        }
+
+        String optionFiltreValeur = OptionsFiltreBillet.affichageSousMenuFiltre(choix);
+
+        try {
+            coordonnateur.consulterListeBillet(optionFiltreValeur, choix);
+        } catch (Exception e) {
+            System.out.println(ConsoleColors.RED + e.getMessage() + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.RED + "La liste des billets n'a pas été affichée" + ConsoleColors.RESET);
+        }
     }
 }

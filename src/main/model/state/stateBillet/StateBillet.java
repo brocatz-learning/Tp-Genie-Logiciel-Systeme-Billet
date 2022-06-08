@@ -28,6 +28,13 @@ public abstract class StateBillet {
         billet.setEtatBillet(new StateOuvert(billet));
         insertHistoriqueBillet(usager,commentaire,billet.getEtatBillet());
     }
+
+    public void bloquerBillet(Usager usager,String commentaire) {
+        billet.setEtatBillet(new StateBloque(billet));
+        insertHistoriqueBillet(usager, commentaire, billet.getEtatBillet());
+    }
+
+
     public  void mettreEnAttenteDeployement(Usager usager,String commentaire) {
         insertHistoriqueBillet(usager,commentaire,billet.getEtatBillet());
     }

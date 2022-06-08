@@ -6,6 +6,8 @@ import persistence.RegistreProjet;
 import persistence.RegistreUsager;
 import persistence.ServicePeristence;
 
+import java.util.List;
+
 public class FacadeApplication {
 
    private ServicePeristence servicePeristence = new ServicePeristence();
@@ -38,6 +40,10 @@ public class FacadeApplication {
     public boolean createBillet(BilletDTO billetDTO) {
 
 
+
+        Billet billet = new Billet(billetDTO);
+
+
 //        Billet billet =
 //                new Billet(
 //                        billetDTO.getDescriptionProbleme(),
@@ -48,6 +54,7 @@ public class FacadeApplication {
 
         //boolean isBilletAdded = servicePeristence.createBillet(billet);
 
+        boolean isBilletAdded = servicePeristence.createBillet(billet);
         return false;
     }
 
@@ -75,5 +82,13 @@ public class FacadeApplication {
 
     public boolean createAssignation(String  nomProjet, String emailUsager) {
         return servicePeristence.createAssignation(nomProjet, emailUsager);
+    }
+
+    public List<Billet> consulterListeBillet(Filtre filtre, int choix) {
+        return servicePeristence.consulterListeBillet(filtre, choix);
+    }
+
+    public boolean isProjetExist(String nom) {
+        return servicePeristence.isProjetNameDuplicated(nom);
     }
 }

@@ -5,6 +5,8 @@ import exception.*;
 import facade.FacadeApplication;
 import model.*;
 
+import java.util.List;
+
 public class Coordonnateur {
 
     private FacadeApplication facadeApplication = new FacadeApplication();
@@ -49,7 +51,7 @@ public class Coordonnateur {
      * Verification avant de creer le billet
      * Verification de l'existence d'un projet et d'un usager
      *
-     * @param aucun
+     * @param
      * @throws UserNotVaildExeption
      */
     public void verifyBilletCreatable() throws BilletNotCreatableExeception {
@@ -61,10 +63,11 @@ public class Coordonnateur {
         }
     }
 
-    public void createBillet (BilletDTO billetDTO) throws UserNotVaildExeption, BilletNotCreatableExeception {
+    public void createBillet (BilletDTO billetDTO) throws UserNotVaildExeption, BilletNotCreatableExeception, ProjetNotValidExeception {
 
         boolean isDemandeurExist = facadeApplication.isEmailInEnRegistre(billetDTO.getDemandeur().getEmail());
         boolean isPersonneEnChargerExist = facadeApplication.isEmailInEnRegistre(billetDTO.getPersonneEnCharger().getEmail());
+        boolean isProjetExist = facadeApplication.isProjetExist(billetDTO.getProjet().getNom());
 
         if (!isDemandeurExist) {
             throw new UserNotVaildExeption("L'email du demandeur n'existe pas");
@@ -72,6 +75,10 @@ public class Coordonnateur {
 
         if (!isPersonneEnChargerExist) {
             throw new UserNotVaildExeption("L'email de la  personne en charge n'existe pas");
+        }
+
+        if (!isProjetExist) {
+            throw new ProjetNotValidExeception("Le projet n'existe pas");
         }
 
 
@@ -108,4 +115,24 @@ public class Coordonnateur {
     }
 
 
+    /**
+     * Verification avant de creer le billet
+     * Verification de l'existence d'un projet et d'un usager
+     *
+     * @param valeur  : correspond a la valeur saisie par l'utilisateur
+     *                ex : email, date, nom projet, etc
+     * @param choix
+     * @throws UserNotVaildExeption
+     */
+    public List<Billet> consulterListeBillet(String valeur, int choix) throws FiltreNotValidException {
+
+        Filtre filtre = Filtre.values()[choix];
+
+        if (filtre == null) {
+            throw new FiltreNotValidException("Filtre non valide");
+        }
+
+        List<Billet> listFiltre =  facadeApplication.consulterListeBillet(filtre, choix);
+        return listFiltre;
+    }
 }
