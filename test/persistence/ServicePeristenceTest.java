@@ -1,8 +1,6 @@
 package persistence;
 
-import model.Projet;
-import model.Usager;
-import model.UsagerDTO;
+import model.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -81,5 +79,16 @@ class ServicePeristenceTest {
         assertFalse(
                 servicePeristence.createAssignation(email, nomProjet)
                 , "L'assignation existe deja");
+    }
+
+    @Test
+    void addBillet() {
+        Billet billet = new Billet();
+        billet.setNote("Probleme de la souris");
+        billet.setPersonneEnCharger(new Usager(1,"Maxi","James","jmaxi","12345678","",new Date()));
+        billet.setDemandeur(new Usager(1,"Maxi","James","jmaxi","12345678","",new Date()));
+        billet.setCategory("Bug");
+        billet.setGravity(Gravity.Faible);
+
     }
 }

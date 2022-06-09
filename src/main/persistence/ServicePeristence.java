@@ -46,13 +46,16 @@ public class ServicePeristence {
 
     public boolean createBillet(Billet billet) {
 
-        Usager personneEnCharge = registreUsager.findByEmail(billet.getPersonneEnCharger().getEmail());
+//        Usager personneEnCharge = registreUsager.findByEmail(billet.getPersonneEnCharger().getEmail());
         Usager demandeur = registreUsager.findByEmail(billet.getDemandeur().getEmail());
         Projet projet = registreProjet.findByNom(billet.getProjet().getNom());
 
-        if (personneEnCharge == null || demandeur == null || projet == null) {
+        if (demandeur == null || projet == null) {
             return false;
         }
+
+        billet.setDemandeur(demandeur);
+        billet.setProjet(projet);
 
 
         return registreBillet.addBillet(billet);

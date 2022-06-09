@@ -35,7 +35,9 @@ public class RegistreBillet {
     public boolean addBillet(Billet billet) {
         billet.setId(listBillet.size() + 1);
 
-        return this.listBillet.add(billet);
+        boolean isAdded = listBillet.add(billet);
+
+        return isAdded;
     }
 
     public int getSize() {

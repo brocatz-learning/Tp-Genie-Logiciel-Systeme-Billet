@@ -2,10 +2,12 @@ package facade;
 
 import exception.UserNotVaildExeption;
 import model.*;
+import model.state.stateBillet.StateOuvert;
 import persistence.RegistreProjet;
 import persistence.RegistreUsager;
 import persistence.ServicePeristence;
 
+import java.util.Date;
 import java.util.List;
 
 public class FacadeApplication {
@@ -40,8 +42,10 @@ public class FacadeApplication {
     public boolean createBillet(BilletDTO billetDTO) {
 
 
-
         Billet billet = new Billet(billetDTO);
+        billet.setDateCreationBillet(new Date());
+        billet.setEtatBillet(new StateOuvert(billet));
+
 
 
 //        Billet billet =
@@ -53,9 +57,7 @@ public class FacadeApplication {
 //                        billetDTO.getGravity());
 
         //boolean isBilletAdded = servicePeristence.createBillet(billet);
-
-        boolean isBilletAdded = servicePeristence.createBillet(billet);
-        return false;
+        return servicePeristence.createBillet(billet);
     }
 
     public boolean isProjetDuplicated(String nomProjet) {

@@ -5,15 +5,12 @@ import exception.BilletNotCreatableExeception;
 import exception.CategoryAlreadyExistExeception;
 import exception.ProjetNotAssignableToUserExeception;
 import exception.ProjetNotValidExeception;
-import facade.FacadeApplication;
 import model.BilletDTO;
-import model.Filtre;
 import model.ProjetDTO;
 import model.UsagerDTO;
 import utile.ConsoleColors;
 
 import java.util.Scanner;
-import java.util.logging.Filter;
 
 public class Presentation {
 
@@ -237,15 +234,15 @@ public class Presentation {
         System.out.println("--------------------------------------");
 
         System.out.println("Veuillez entrez le nom du billet ");
-        String nomBillet = scanner.next();
-        System.out.println("Veuillez entrez la description du billet");
-        String descriptionBillet = scanner.next();
+        String nomBillet = scanner.nextLine();
+        System.out.println("Veuillez entrez la note du billet");
+        String note = scanner.nextLine();
         System.out.println("Veuillez l'email du demandeur");
-        String emailDemandeur = scanner.next();
-        System.out.println("Veuillez l'email de la personne en charge");
-        String emailEnCharge = scanner.next();
+        String emailDemandeur = scanner.nextLine();
+//        System.out.println("Veuillez l'email de la personne en charge");
+//        String emailEnCharge = scanner.next();
         System.out.println("Veuillez entrez le nom du projet");
-        String nomProjet = scanner.next();
+        String nomProjet = scanner.nextLine();
 
         int gravity = -1;
 
@@ -271,13 +268,13 @@ public class Presentation {
             UsagerDTO usagerenCharge = new UsagerDTO();
 
             usagerdemandeur.setEmail(emailDemandeur);
-            usagerenCharge.setEmail(emailEnCharge);
+//            usagerenCharge.setEmail(emailEnCharge);
 
             projetDTO.setNom(nomProjet);
 
 
             BilletDTO billetDTO = new BilletDTO();
-            billetDTO.setDescriptionProbleme(nomBillet);
+            billetDTO.setNote(nomBillet);
             billetDTO.setPersonneEnCharger(usagerenCharge);
             billetDTO.setDemandeur(usagerdemandeur);
             billetDTO.setProjet(projetDTO);

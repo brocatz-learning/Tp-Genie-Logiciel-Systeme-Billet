@@ -12,7 +12,7 @@ public class Billet {
     private static int generateurBillet = 0;
 
     private int id;
-    private String descriptionProbleme;
+    private String note;
     private Usager personneEnCharger;
     private Usager demandeur;
     private StateBillet etatBillet;
@@ -23,12 +23,14 @@ public class Billet {
 
     private List<HistoriqueBillet> historiqueBillets;
 
-    private Date date;
+    private Date dateCreationBillet;
+    private Date dateAssignationBillet;
 
 
+    public Billet() {}
     public Billet(BilletDTO billetDTO) {
         this.setId(billetDTO.getId());
-        this.setDescriptionProbleme(billetDTO.getDescriptionProbleme());
+        this.setNote(billetDTO.getNote());
         this.setPersonneEnCharger(new Usager(billetDTO.getPersonneEnCharger()));
         this.setDemandeur(new Usager(billetDTO.getDemandeur()));
         this.setEtatBillet(billetDTO.getEtatBillet());
@@ -36,11 +38,11 @@ public class Billet {
         this.setCategory(billetDTO.getCategory());
         this.setProjet(new Projet(billetDTO.getProjet()));
         this.setHistoriqueBillets(billetDTO.getHistoriqueBillets());
-        this.setDate(billetDTO.getDate());
+        this.setDateCreationBillet(billetDTO.getDateCreation());
     }
 
-    public Billet(String descriptionProbleme, Usager personneEnCharger, Usager demandeur, String category, Gravity gravity,Projet projet) {
-        this.descriptionProbleme = descriptionProbleme;
+    public Billet(String note, Usager personneEnCharger, Usager demandeur, String category, Gravity gravity,Projet projet) {
+        this.note = note;
         this.personneEnCharger = personneEnCharger;
         this.demandeur = demandeur;
         this.gravity = gravity;
@@ -49,7 +51,7 @@ public class Billet {
 
         this.id = ++ generateurBillet;
         this.etatBillet = new StateOuvert(this);
-        this.date = new Date();
+        this.dateCreationBillet = new Date();
         this.historiqueBillets = new ArrayList<>();
     }
 
@@ -61,12 +63,12 @@ public class Billet {
         this.id = id;
     }
 
-    public String getDescriptionProbleme() {
-        return descriptionProbleme;
+    public String getNote() {
+        return note;
     }
 
-    public void setDescriptionProbleme(String descriptionProbleme) {
-        this.descriptionProbleme = descriptionProbleme;
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public Usager getPersonneEnCharger() {
@@ -125,12 +127,12 @@ public class Billet {
         this.projet = projet;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDateCreationBillet() {
+        return dateCreationBillet;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateCreationBillet(Date dateCreationBillet) {
+        this.dateCreationBillet = dateCreationBillet;
     }
 
 
@@ -138,7 +140,7 @@ public class Billet {
     public BilletDTO asDTO () {
         BilletDTO dto = new BilletDTO();
         dto.setId(this.id);
-        dto.setDescriptionProbleme(this.descriptionProbleme);
+        dto.setNote(this.note);
         dto.setPersonneEnCharger(this.personneEnCharger.asDTO());
         dto.setDemandeur(this.demandeur.asDTO());
         dto.setEtatBillet(this.etatBillet);

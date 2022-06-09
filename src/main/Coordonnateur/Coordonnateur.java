@@ -66,16 +66,16 @@ public class Coordonnateur {
     public void createBillet (BilletDTO billetDTO) throws UserNotVaildExeption, BilletNotCreatableExeception, ProjetNotValidExeception {
 
         boolean isDemandeurExist = facadeApplication.isEmailInEnRegistre(billetDTO.getDemandeur().getEmail());
-        boolean isPersonneEnChargerExist = facadeApplication.isEmailInEnRegistre(billetDTO.getPersonneEnCharger().getEmail());
+//        boolean isPersonneEnChargerExist = facadeApplication.isEmailInEnRegistre(billetDTO.getPersonneEnCharger().getEmail());
         boolean isProjetExist = facadeApplication.isProjetExist(billetDTO.getProjet().getNom());
 
         if (!isDemandeurExist) {
             throw new UserNotVaildExeption("L'email du demandeur n'existe pas");
         }
 
-        if (!isPersonneEnChargerExist) {
-            throw new UserNotVaildExeption("L'email de la  personne en charge n'existe pas");
-        }
+//        if (!isPersonneEnChargerExist) {
+//            throw new UserNotVaildExeption("L'email de la  personne en charge n'existe pas");
+//        }
 
         if (!isProjetExist) {
             throw new ProjetNotValidExeception("Le projet n'existe pas");

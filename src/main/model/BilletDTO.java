@@ -8,7 +8,7 @@ import java.util.List;
 public class BilletDTO {
 
     private int id;
-    private String descriptionProbleme;
+    private String note;
     private UsagerDTO personneEnCharger;
     private UsagerDTO demandeur;
     private StateBillet etatBillet;
@@ -17,7 +17,10 @@ public class BilletDTO {
 
     private List<HistoriqueBillet> historiqueBillets;
 
-    private Date date;
+    private Date dateCreation;
+
+    private Date dateAssignation;
+
 
     private ProjetDTO projet;
 
@@ -32,12 +35,12 @@ public class BilletDTO {
         this.id = id;
     }
 
-    public String getDescriptionProbleme() {
-        return descriptionProbleme;
+    public String getNote() {
+        return note;
     }
 
-    public void setDescriptionProbleme(String descriptionProbleme) {
-        this.descriptionProbleme = descriptionProbleme;
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public UsagerDTO getPersonneEnCharger() {
@@ -88,12 +91,12 @@ public class BilletDTO {
         this.historiqueBillets = historiqueBillets;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDateCreation() {
+        return dateCreation;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateCreation(Date dateCreation) {
+        this.dateCreation = dateCreation;
     }
 
     public ProjetDTO getProjet() {
@@ -102,5 +105,13 @@ public class BilletDTO {
 
     public void setProjet(ProjetDTO projet) {
         this.projet = projet;
+    }
+
+    public Date getDateAssignation() {
+        return dateAssignation;
+    }
+
+    public void setDateAssignation(Date dateAssignation) {
+        this.dateAssignation = dateAssignation;
     }
 }

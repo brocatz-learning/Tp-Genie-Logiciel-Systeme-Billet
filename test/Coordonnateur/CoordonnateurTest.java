@@ -1,6 +1,5 @@
 package Coordonnateur;
 
-import exception.BilletNotCreatableExeception;
 import exception.CategoryAlreadyExistExeception;
 import exception.ProjetNotValidExeception;
 import exception.UserNotVaildExeption;
@@ -106,13 +105,14 @@ class CoordonnateurTest {
 
     @Test
     void testBilletNotCreatable () {
-        Billet billet1 = new Billet("Probleme d'affichage", new Usager(), new Usager(), "Bug",Gravity.Moyenne, new Projet());
+        Billet billet1 = new Billet("Probleme d'affichage", new Usager(), new Usager(), "Bug",Gravity.Moyenne, new Projet("Projet1", "Description1"));
         BilletDTO billetDTO1 = new BilletDTO();
-        billetDTO1.setDescriptionProbleme("Probleme d'affichage");
+        billetDTO1.setNote("Probleme d'affichage");
         billetDTO1.setPersonneEnCharger(new UsagerDTO());
         billetDTO1.setDemandeur(new UsagerDTO());
         billetDTO1.setCategory("Bug");
         billetDTO1.setGravity(Gravity.Moyenne);
+        billetDTO1.setProjet(new ProjetDTO());
 
         Exception exception = assertThrows(Exception.class, () ->{
             coordonnateur.createBillet(billetDTO1);
@@ -141,7 +141,38 @@ class CoordonnateurTest {
     }
 
 
+
     @Test
     void createBillet() {
+
+        ProjetDTO projetDTO = new ProjetDTO();
+        projetDTO.setNom("Projet5");
+        projetDTO.setDescription("Description1");
+
+        UsagerDTO usagerDTO = new UsagerDTO();
+        usagerDTO.setId(1);
+        usagerDTO.setEmail("maxi@gmail.com" );
+        usagerDTO.setNom("Maxi");
+        usagerDTO.setPrenom("James");
+        usagerDTO.setUsername("jmaxi");
+        usagerDTO.setPassword("12345678");
+
+
+        BilletDTO billetDTO = new BilletDTO();
+        billetDTO.setNote("Probleme d'affichage");
+        billetDTO.setDemandeur(usagerDTO);
+        billetDTO.setPersonneEnCharger(usagerDTO);
+        billetDTO.setCategory("Bug");
+        billetDTO.setGravity(Gravity.Moyenne);
+        billetDTO.setProjet(projetDTO);
+
+
+
+        assertDoesNotThrow(() -> {
+            coordonnateur.createUsager(usagerDTO, 1);
+            coordonnateur.createProjet(projetDTO);
+            coordonnateur.createBillet(billetDTO);
+        });
+
     }
 }
