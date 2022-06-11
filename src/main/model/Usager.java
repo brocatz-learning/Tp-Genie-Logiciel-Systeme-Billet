@@ -87,7 +87,10 @@ public  class Usager implements Comparable<Usager> {
 
     // Les email
     public void setEmail(String email) {
-        this.email = email.toLowerCase(Locale.ROOT);
+        if (email != null) {
+            email = email.toLowerCase(Locale.ROOT);
+        }
+        this.email = email;
     }
 
     public Date getDateCreation() {

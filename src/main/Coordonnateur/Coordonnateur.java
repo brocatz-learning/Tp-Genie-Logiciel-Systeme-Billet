@@ -69,6 +69,8 @@ public class Coordonnateur {
 //        boolean isPersonneEnChargerExist = facadeApplication.isEmailInEnRegistre(billetDTO.getPersonneEnCharger().getEmail());
         boolean isProjetExist = facadeApplication.isProjetExist(billetDTO.getProjet().getNom());
 
+        boolean isCategoryExist = facadeApplication.isCategoryExist(billetDTO.getCategory());
+
         if (!isDemandeurExist) {
             throw new UserNotVaildExeption("L'email du demandeur n'existe pas");
         }
@@ -80,6 +82,12 @@ public class Coordonnateur {
         if (!isProjetExist) {
             throw new ProjetNotValidExeception("Le projet n'existe pas");
         }
+
+        if (!isCategoryExist) {
+            throw new ProjetNotValidExeception("La category du billet n'existe pas");
+        }
+
+
 
 
         boolean isBilletCreated = facadeApplication.createBillet(billetDTO);

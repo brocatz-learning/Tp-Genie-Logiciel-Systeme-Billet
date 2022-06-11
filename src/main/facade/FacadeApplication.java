@@ -93,4 +93,8 @@ public class FacadeApplication {
     public boolean isProjetExist(String nom) {
         return servicePeristence.isProjetNameDuplicated(nom);
     }
+
+    public boolean isCategoryExist(String category) {
+        return servicePeristence.isCateogrieInRegistre(category);
+    }
 }

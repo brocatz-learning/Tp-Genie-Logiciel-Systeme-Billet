@@ -5,9 +5,7 @@ import exception.BilletNotCreatableExeception;
 import exception.CategoryAlreadyExistExeception;
 import exception.ProjetNotAssignableToUserExeception;
 import exception.ProjetNotValidExeception;
-import model.BilletDTO;
-import model.ProjetDTO;
-import model.UsagerDTO;
+import model.*;
 import utile.ConsoleColors;
 
 import java.util.Scanner;
@@ -231,7 +229,10 @@ public class Presentation {
 
 
         System.out.println("Menu creation d'un billet");
+
         System.out.println("--------------------------------------");
+
+        scanner.nextLine();
 
         System.out.println("Veuillez entrez le nom du billet ");
         String nomBillet = scanner.nextLine();
@@ -243,6 +244,8 @@ public class Presentation {
 //        String emailEnCharge = scanner.next();
         System.out.println("Veuillez entrez le nom du projet");
         String nomProjet = scanner.nextLine();
+        System.out.println("Veuillez entrez le nom de la categorie");
+        String nomCategorie = scanner.nextLine();
 
         int gravity = -1;
 
@@ -278,6 +281,8 @@ public class Presentation {
             billetDTO.setPersonneEnCharger(usagerenCharge);
             billetDTO.setDemandeur(usagerdemandeur);
             billetDTO.setProjet(projetDTO);
+            billetDTO.setCategory(nomCategorie);
+            billetDTO.setGravity(Gravity.fromId(gravity));
 
 
             coordonnateur.createBillet(billetDTO);
