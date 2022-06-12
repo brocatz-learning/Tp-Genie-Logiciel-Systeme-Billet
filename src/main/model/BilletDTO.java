@@ -2,6 +2,7 @@ package model;
 
 import model.state.stateBillet.StateBillet;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -113,5 +114,57 @@ public class BilletDTO {
 
     public void setDateAssignation(Date dateAssignation) {
         this.dateAssignation = dateAssignation;
+    }
+
+    public String toString() {
+        return "BilletDTO{" +
+                "id=" + id +
+                ", note='" + note + '\'' +
+                ", personneEnCharger=" + personneEnCharger +
+                ", demandeur=" + demandeur +
+                ", etatBillet=" + etatBillet +
+                ", gravity=" + gravity +
+                ", category='" + category + '\'' +
+                ", historiqueBillets=" + historiqueBillets +
+                ", dateCreation=" + dateCreation +
+                ", dateAssignation=" + dateAssignation +
+                ", projet=" + projet +
+                '}';
+    }
+
+    public String formatBillet() {
+
+
+        System.out.print(String.format("%-10s\t", "id"));
+        System.out.print(String.format("%-20s", "note"));
+        System.out.print(String.format("%-32s", "personneEnCharge"));
+        System.out.print(String.format("%-32s", "demandeur"));
+        System.out.print(String.format("%-15s", "etatBillet"));
+        System.out.print(String.format("%-10s", "gravity"));
+        System.out.print(String.format("%-12s", "category"));
+        System.out.print(String.format("%-25s", "historiqueBillets"));
+        System.out.print(String.format("%-25s", "dateCreation"));
+        System.out.print(String.format("%-25s", "dateAssignation"));
+        System.out.print(String.format("%-15s", "projet"));
+
+
+        System.out.println();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateFormatted = sdf.format(this.getDateCreation());
+
+        return
+                String.format("%-10s\t", id) +
+                String.format("%-20s", note) +
+                String.format("%-32s", personneEnCharger.getEmail()) +
+                String.format("%-32s", demandeur.getEmail()) +
+                String.format("%-15s", etatBillet.getCurrentState()) +
+                String.format("%-10s", gravity) +
+                String.format("%-12s", category) +
+                String.format("%-25s", historiqueBillets) +
+                String.format("%-25s", dateFormatted) +
+                String.format("%-25s", dateAssignation) +
+                String.format("%-15s", projet.getNom());
+
     }
 }

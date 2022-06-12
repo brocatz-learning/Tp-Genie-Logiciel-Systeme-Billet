@@ -1,12 +1,11 @@
 package facade;
 
-import exception.UserNotVaildExeption;
 import model.*;
 import model.state.stateBillet.StateOuvert;
-import persistence.RegistreProjet;
-import persistence.RegistreUsager;
 import persistence.ServicePeristence;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,6 +43,7 @@ public class FacadeApplication {
 
         Billet billet = new Billet(billetDTO);
         billet.setDateCreationBillet(new Date());
+        billet.setHistoriqueBillets(new ArrayList<HistoriqueBillet>());
         billet.setEtatBillet(new StateOuvert(billet));
 
 
@@ -86,8 +86,25 @@ public class FacadeApplication {
         return servicePeristence.createAssignation(nomProjet, emailUsager);
     }
 
-    public List<Billet> consulterListeBillet(Filtre filtre, int choix) {
-        return servicePeristence.consulterListeBillet(filtre, choix);
+    public List<BilletDTO> consulterListeBillet(Filtre filtre, String valeur) {
+        List<Billet> listeBillet = servicePeristence.consulterListeBillet(filtre, valeur);
+
+        List<BilletDTO> listeBilletDTO = new ArrayList<BilletDTO>();
+
+        listeBillet.forEach(billet -> {
+            BilletDTO billetDTO = new BilletDTO();
+            billetDTO.setId(billet.getId());
+            billetDTO.setNote(billet.getNote());
+            billetDTO.setPersonneEnCharger(billet.getPersonneEnCharger().asDTO());
+            billetDTO.setDemandeur(billet.getDemandeur().asDTO());
+            billetDTO.setCategory(billet.getCategory());
+            billetDTO.setGravity(billet.getGravity());
+            billetDTO.setEtatBillet(billet.getEtatBillet());
+            billetDTO.setDateCreation(billet.getDateCreationBillet());
+            listeBilletDTO.add(billetDTO);
+        });
+
+        return listeBilletDTO;
     }
 
     public boolean isProjetExist(String nom) {

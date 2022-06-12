@@ -88,10 +88,8 @@ public class ServicePeristence {
 
 
 
-    public List<Billet> consulterListeBillet(Filtre filtre, int choix) {
-
-
-        return null;
+    public List<Billet> consulterListeBillet(Filtre filtre, String valeur) {
+        return registreBillet.filtreBillet(filtre, valeur);
     }
 }
 

@@ -27,7 +27,11 @@ public class Billet {
     private Date dateAssignationBillet;
 
 
-    public Billet() {}
+    public Billet() {
+        this.dateCreationBillet = new Date();
+        this.historiqueBillets = new ArrayList<>();
+        this.etatBillet = new StateOuvert(this);
+    }
     public Billet(BilletDTO billetDTO) {
         this.setId(billetDTO.getId());
         this.setNote(billetDTO.getNote());

@@ -8,6 +8,7 @@ import exception.ProjetNotValidExeception;
 import model.*;
 import utile.ConsoleColors;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Presentation {
@@ -69,6 +70,12 @@ public class Presentation {
                 case 5:
                     afficherMenuCreationBillet();
                     break;
+                case 8:
+                    afficherMenuConsulterListeBillet();
+                    break;
+                default:
+                    System.out.println(ConsoleColors.RED + "\nErreur veuillez entrez une option entre 0 et 9\n"
+                            + ConsoleColors.RESET);
             }
 
             // On doit reinitialser la reponse pour le prochain tour
@@ -81,7 +88,7 @@ public class Presentation {
     }
 
 
-    // 1- TODO Menu Creation Compte Usager
+    // 1- TODO Completed Menu Creation Compte Usager
     // Completed
     public static void afficherMenuCreationCompteUsager () {
 
@@ -132,7 +139,7 @@ public class Presentation {
 
     }
 
-    // 2 TODO Menu Creation Projet
+    // 2 TODO Completed Menu Creation Projet
     // Completed
     public static void afficherMenuCreationProjet() {
         System.out.println("Menu creation d'un projet");
@@ -157,6 +164,7 @@ public class Presentation {
 
     }
 
+    // 3 TODO Completed Menu Creation Completed
     // 3 Assigner un usager technique a un projet
 
     public static void afficherMenuAssignationUsagerTechniqueProjet() {
@@ -184,7 +192,7 @@ public class Presentation {
 
     }
 
-    // 4 TODO Menu Creation Categorie
+    // 4 TODO Completed : Menu Creation Categorie
     // Completed
     public static void afficherMenuCreationCategorie() {
         System.out.println("Menu creation d'une categorie");
@@ -204,7 +212,8 @@ public class Presentation {
 
     }
 
-    // 6 TODO Menu Creation Billet
+    // 6 TODO Completed : Menu Creation Billet
+
     public static void afficherMenuCreationBillet() {
 
         // On doit verifier si au moins un usager et ub projet et existe
@@ -234,8 +243,6 @@ public class Presentation {
 
         scanner.nextLine();
 
-        System.out.println("Veuillez entrez le nom du billet ");
-        String nomBillet = scanner.nextLine();
         System.out.println("Veuillez entrez la note du billet");
         String note = scanner.nextLine();
         System.out.println("Veuillez l'email du demandeur");
@@ -277,7 +284,7 @@ public class Presentation {
 
 
             BilletDTO billetDTO = new BilletDTO();
-            billetDTO.setNote(nomBillet);
+            billetDTO.setNote(note);
             billetDTO.setPersonneEnCharger(usagerenCharge);
             billetDTO.setDemandeur(usagerdemandeur);
             billetDTO.setProjet(projetDTO);
@@ -336,11 +343,25 @@ public class Presentation {
 
         String optionFiltreValeur = OptionsFiltreBillet.affichageSousMenuFiltre(choix);
 
+        List<BilletDTO> billetList = null;
         try {
-            coordonnateur.consulterListeBillet(optionFiltreValeur, choix);
+             billetList = coordonnateur.consulterListeBillet(optionFiltreValeur, choix);
         } catch (Exception e) {
             System.out.println(ConsoleColors.RED + e.getMessage() + ConsoleColors.RESET);
             System.out.println(ConsoleColors.RED + "La liste des billets n'a pas été affichée" + ConsoleColors.RESET);
+        }
+
+        if (billetList != null) {
+            if (billetList.isEmpty()) {
+                System.out.println(ConsoleColors.RED + "Aucun billet n'a été trouvé" + ConsoleColors.RESET);
+            }
+            if (billetList.size() > 0) {
+                System.out.println(ConsoleColors.GREEN + "Liste des billets" + ConsoleColors.RESET);
+                System.out.println("--------------------------------------");
+                for (BilletDTO billet : billetList) {
+                    System.out.println(billet.toString());
+                }
+            }
         }
     }
 }

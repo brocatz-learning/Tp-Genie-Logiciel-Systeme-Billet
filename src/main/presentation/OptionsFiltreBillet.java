@@ -1,6 +1,7 @@
 package presentation;
 
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class OptionsFiltreBillet {
 
@@ -41,14 +42,25 @@ public class OptionsFiltreBillet {
     }
 
     public static String  affichageSousMenuDateOuverture() {
-        System.out.print("Veuillez entrez une date d'ouverture  en format: YYYY-MM-DD ou  yyyy-mm-dd\n");
-        String dateOuverture = scanner.nextLine();
+
+        // Format de la date : yyyyMMdd
+        Pattern pattern = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
+        String dateOuverture = "";
+        System.out.println("Entrez la date d'ouverture (yyyy-MM-dd) : ");
+        while (!pattern.matcher(dateOuverture).matches()) {
+            dateOuverture = scanner.nextLine();
+            if (!pattern.matcher(dateOuverture).matches()) {
+                System.out.println("Erreur, veuillez entrez la date d'ouverture (yyyy-MM-dd)");
+            }
+        }
+
         return dateOuverture;
     }
 
     public static String affichageSousMenuDemandeur() {
         System.out.print("Veuillez entrez l'email du demandeur\n");
         String demandeur = scanner.nextLine();
+
         return demandeur;
     }
 

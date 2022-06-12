@@ -50,6 +50,12 @@ class RegistreBilletTest {
     }
 
     @Test
+    void testGetDateOuverture() {
+        List<Billet> list = registreBillet.filtreBillet(Filtre.DateOuverture, "2021dsv2-06-12");
+        assertTrue(list.size() > 0);
+    }
+
+    @Test
     void testFiltrePersonneEnChangeBillet() {
         List<Billet> billetList = registreBillet.filtreBillet(Filtre.PersonneEnCharge, "super@gmail.com");
         assertTrue(billetList.size() > 0);

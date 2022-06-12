@@ -5,6 +5,7 @@ import exception.*;
 import facade.FacadeApplication;
 import model.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Coordonnateur {
@@ -132,15 +133,17 @@ public class Coordonnateur {
      * @param choix
      * @throws UserNotVaildExeption
      */
-    public List<Billet> consulterListeBillet(String valeur, int choix) throws FiltreNotValidException {
+    public List<BilletDTO> consulterListeBillet(String valeur, int choix) throws FiltreNotValidException {
 
-        Filtre filtre = Filtre.values()[choix];
+        Filtre filtre = Filtre.fromId(choix);
 
         if (filtre == null) {
             throw new FiltreNotValidException("Filtre non valide");
         }
 
-        List<Billet> listFiltre =  facadeApplication.consulterListeBillet(filtre, choix);
-        return listFiltre;
+        List<BilletDTO> listFiltreDTO =  facadeApplication.consulterListeBillet(filtre, valeur);
+
+
+        return listFiltreDTO;
     }
 }

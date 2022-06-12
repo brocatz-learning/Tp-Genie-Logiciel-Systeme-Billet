@@ -3,9 +3,13 @@ package persistence;
 import model.Billet;
 import model.Filtre;
 import model.state.stateBillet.StateOuvert;
+import org.apache.commons.lang3.time.DateUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,13 +49,22 @@ public class RegistreBillet {
     }
 
 
-    public static List<Billet> filtreBillet (Filtre filtre, String inputUtilisateur) {
+    public  List<Billet> filtreBillet (Filtre filtre, String inputUtilisateur) {
         List<Billet> listARetourner = new ArrayList<>();
         switch (filtre) {
             case DateOuverture:
-                listARetourner = registreBillet.listBillet.stream()
-                        .sorted(Comparator.comparing(Billet::getCategory))
-                        .collect(Collectors.toCollection(ArrayList::new));
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    Date date = sdf.parse(inputUtilisateur);
+
+                    listARetourner = registreBillet.listBillet.stream()
+                            .filter((billet) -> {
+                                return DateUtils.isSameDay(billet.getDateCreationBillet(), date);})
+                            .collect(Collectors.toCollection(ArrayList::new));
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+
                 break;
             case Demandeur:
                 listARetourner = registreBillet.listBillet.stream()
