@@ -1,5 +1,9 @@
 package model;
 
+import model.dataModel.Billet;
+import model.dataModel.Gravity;
+import model.dataModel.Projet;
+import model.dataModel.Usager;
 import model.state.stateBillet.StateEnAttenteDeploy;
 import model.state.stateBillet.StateFermer;
 import model.state.stateBillet.StateOuvert;
@@ -23,7 +27,7 @@ class RegistreBilletTest {
     static void beforeAll() {
         registreBillet = RegistreBillet.getInstance();
 
-        Billet billet = new Billet("Probleme d'affichage", new Usager(), new Usager(),"Bug",Gravity.Faible, new Projet());
+        Billet billet = new Billet("Probleme d'affichage", new Usager(), new Usager(),"Bug", Gravity.Faible, new Projet());
         Billet billet1 = new Billet("Probleme d'affichage", new Usager(), new Usager(),"Bug",Gravity.Moyenne, new Projet());
         Billet billet2 = new Billet("Probleme d'affichage", new Usager(), new Usager(),"Bug",Gravity.Elevee, new Projet());
         Billet billet3 = new Billet("Probleme d'affichage", new Usager(), new Usager(),"Bug",Gravity.Moyenne, new Projet());

@@ -1,6 +1,6 @@
 package persistence;
 
-import model.Projet;
+import model.dataModel.Projet;
 
 import java.util.ArrayList;
 import java.util.List;

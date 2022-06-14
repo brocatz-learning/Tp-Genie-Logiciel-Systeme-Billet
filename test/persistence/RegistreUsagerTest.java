@@ -1,7 +1,7 @@
 package persistence;
 
 import exception.UserNotVaildExeption;
-import model.Usager;
+import model.dataModel.Usager;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

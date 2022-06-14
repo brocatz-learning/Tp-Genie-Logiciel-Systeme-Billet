@@ -1,5 +1,6 @@
 package model;
 
+import model.dataModel.Gravity;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

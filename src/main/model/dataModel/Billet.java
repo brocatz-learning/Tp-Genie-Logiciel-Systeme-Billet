@@ -1,5 +1,6 @@
-package model;
+package model.dataModel;
 
+import model.dto.BilletDTO;
 import model.state.stateBillet.StateBillet;
 import model.state.stateBillet.StateOuvert;
 

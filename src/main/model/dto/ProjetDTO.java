@@ -1,4 +1,6 @@
-package model;
+package model.dto;
+
+import model.dataModel.Usager;
 
 import java.util.Date;
 import java.util.TreeSet;

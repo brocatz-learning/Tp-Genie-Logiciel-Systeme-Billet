@@ -1,4 +1,4 @@
-package model;
+package model.dataModel;
 
 public enum Filtre {
     DateOuverture(1),

@@ -1,8 +1,8 @@
 package model.state.stateBillet;
 
-import model.Billet;
-import model.HistoriqueBillet;
-import model.Usager;
+import model.dataModel.Billet;
+import model.dataModel.HistoriqueBillet;
+import model.dataModel.Usager;
 
 import java.util.Date;
 

@@ -1,4 +1,6 @@
-package model;
+package model.dataModel;
+
+import model.dto.UsagerDTO;
 
 import java.util.Date;
 import java.util.Locale;

@@ -3,9 +3,11 @@ package Coordonnateur;
 import exception.*;
 ;
 import facade.FacadeApplication;
-import model.*;
+import model.dataModel.Filtre;
+import model.dto.BilletDTO;
+import model.dto.ProjetDTO;
+import model.dto.UsagerDTO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Coordonnateur {

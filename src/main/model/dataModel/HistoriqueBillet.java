@@ -1,5 +1,6 @@
-package model;
+package model.dataModel;
 
+import model.dataModel.Usager;
 import model.state.stateBillet.StateBillet;
 
 import java.util.Date;

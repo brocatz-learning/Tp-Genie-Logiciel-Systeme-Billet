@@ -1,6 +1,6 @@
 package model.state.stateBillet;
 
-import model.Billet;
+import model.dataModel.Billet;
 
 public class StateOuvert extends StateBillet {
 

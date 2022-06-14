@@ -1,4 +1,4 @@
-package model;
+package model.dataModel;
 
 public enum Gravity {
     Faible(1),

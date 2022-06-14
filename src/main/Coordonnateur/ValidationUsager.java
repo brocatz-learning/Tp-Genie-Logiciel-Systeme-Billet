@@ -1,8 +1,7 @@
 package Coordonnateur;
 
 import exception.UserNotVaildExeption;
-import model.Usager;
-import model.UsagerDTO;
+import model.dto.UsagerDTO;
 
 /**
  * Validation pour la couche coordonnateur

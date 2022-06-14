@@ -1,7 +1,6 @@
 package persistence;
 
-import exception.UserNotVaildExeption;
-import model.Usager;
+import model.dataModel.Usager;
 
 import java.util.ArrayList;
 import java.util.List;

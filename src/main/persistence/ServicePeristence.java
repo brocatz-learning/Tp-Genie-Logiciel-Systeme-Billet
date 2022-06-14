@@ -1,9 +1,9 @@
 package persistence;
 
-import model.Billet;
-import model.Filtre;
-import model.Projet;
-import model.Usager;
+import model.dataModel.Billet;
+import model.dataModel.Filtre;
+import model.dataModel.Projet;
+import model.dataModel.Usager;
 
 import java.util.List;
 

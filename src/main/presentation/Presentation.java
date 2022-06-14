@@ -5,7 +5,11 @@ import exception.BilletNotCreatableExeception;
 import exception.CategoryAlreadyExistExeception;
 import exception.ProjetNotAssignableToUserExeception;
 import exception.ProjetNotValidExeception;
-import model.*;
+import model.dataModel.Gravity;
+import model.dto.BilletDTO;
+import model.dto.ProjetDTO;
+import model.dto.UsagerDTO;
+import presentation.formattage.FormatBilletDTO;
 import utile.ConsoleColors;
 
 import java.util.List;
@@ -355,12 +359,12 @@ public class Presentation {
             if (billetList.isEmpty()) {
                 System.out.println(ConsoleColors.RED + "Aucun billet n'a été trouvé" + ConsoleColors.RESET);
             }
+
             if (billetList.size() > 0) {
                 System.out.println(ConsoleColors.GREEN + "Liste des billets" + ConsoleColors.RESET);
                 System.out.println("--------------------------------------");
-                for (BilletDTO billet : billetList) {
-                    System.out.println(billet.toString());
-                }
+                String listBilletFormatted = FormatBilletDTO.formatListBilletDTO(billetList);
+                System.out.println(listBilletFormatted);
             }
         }
     }

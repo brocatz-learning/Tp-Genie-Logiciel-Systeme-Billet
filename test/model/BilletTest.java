@@ -1,6 +1,6 @@
 package model;
 
-import model.state.stateBillet.StateEnAttenteDeploy;
+import model.dataModel.*;
 import model.state.stateBillet.StateFermer;
 import model.state.stateBillet.StateTravailEnCours;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BilletTest {
     @Test
     void testBilletAffichageEtatTravailEnCour() {
-        Billet billet1 = new Billet("Probleme d'affichage", new Usager(), new Usager(),"Bug",Gravity.Moyenne, new Projet());
+        Billet billet1 = new Billet("Probleme d'affichage", new Usager(), new Usager(),"Bug", Gravity.Moyenne, new Projet());
 
         billet1.setEtatBillet(new StateTravailEnCours(billet1));
 

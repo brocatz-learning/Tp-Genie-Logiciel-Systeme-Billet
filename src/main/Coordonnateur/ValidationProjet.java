@@ -1,7 +1,7 @@
 package Coordonnateur;
 
 import exception.ProjetNotValidExeception;
-import model.ProjetDTO;
+import model.dto.ProjetDTO;
 
 public class ValidationProjet {
 

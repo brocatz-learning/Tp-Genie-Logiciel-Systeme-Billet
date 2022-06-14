@@ -1,6 +1,7 @@
-package model;
+package model.dataModel;
 
-import java.io.PrintWriter;
+import model.dto.ProjetDTO;
+
 import java.util.Date;
 import java.util.TreeSet;
 

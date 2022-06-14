@@ -1,10 +1,12 @@
 package facade;
 
-import model.*;
+import model.dataModel.*;
+import model.dto.BilletDTO;
+import model.dto.ProjetDTO;
+import model.dto.UsagerDTO;
 import model.state.stateBillet.StateOuvert;
 import persistence.ServicePeristence;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

@@ -1,13 +1,19 @@
 package Coordonnateur;
 
-import exception.CategoryAlreadyExistExeception;
-import exception.ProjetNotValidExeception;
-import exception.UserNotVaildExeption;
-import model.*;
+import exception.*;
+import model.dataModel.Billet;
+import model.dataModel.Gravity;
+import model.dataModel.Projet;
+import model.dataModel.Usager;
+import model.dto.BilletDTO;
+import model.dto.ProjetDTO;
+import model.dto.UsagerDTO;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,8 +22,40 @@ class CoordonnateurTest {
     private static Coordonnateur coordonnateur;
 
     @BeforeAll
-    static void beforeAll() {
+    static void beforeAll() throws Exception {
         coordonnateur = new Coordonnateur();
+
+        ProjetDTO projetDTO = new ProjetDTO();
+        projetDTO.setNom("Projet6");
+        projetDTO.setDescription("Description1");
+
+        UsagerDTO usagerDTO = new UsagerDTO();
+        usagerDTO.setId(1);
+        usagerDTO.setEmail("maxii@gmail.com" );
+        usagerDTO.setNom("Maxi");
+        usagerDTO.setPrenom("James");
+        usagerDTO.setUsername("jmaxi");
+        usagerDTO.setPassword("12345678");
+
+
+        BilletDTO billetDTO = new BilletDTO();
+        billetDTO.setNote("Probleme d'affichage");
+        billetDTO.setDemandeur(usagerDTO);
+        billetDTO.setPersonneEnCharger(usagerDTO);
+        billetDTO.setCategory("Bug");
+        billetDTO.setGravity(Gravity.Moyenne);
+        billetDTO.setProjet(projetDTO);
+
+        coordonnateur.createUsager(usagerDTO, 1);
+        coordonnateur.createProjet(projetDTO);
+        for (int i = 0; i < 10; i++) {
+            coordonnateur.createBillet(billetDTO);
+        }
+        coordonnateur.createBillet(billetDTO);
+
+
+
+
     }
 
     @Test
@@ -105,7 +143,7 @@ class CoordonnateurTest {
 
     @Test
     void testBilletNotCreatable () {
-        Billet billet1 = new Billet("Probleme d'affichage", new Usager(), new Usager(), "Bug",Gravity.Moyenne, new Projet("Projet1", "Description1"));
+        Billet billet1 = new Billet("Probleme d'affichage", new Usager(), new Usager(), "Bug", Gravity.Moyenne, new Projet("Projet1", "Description1"));
         BilletDTO billetDTO1 = new BilletDTO();
         billetDTO1.setNote("Probleme d'affichage");
         billetDTO1.setPersonneEnCharger(new UsagerDTO());
@@ -174,5 +212,14 @@ class CoordonnateurTest {
             coordonnateur.createBillet(billetDTO);
         });
 
+    }
+
+
+    @Test
+    void consulterListeBillet() throws FiltreNotValidException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        List<BilletDTO> list =
+                coordonnateur.consulterListeBillet("",1);
     }
 }

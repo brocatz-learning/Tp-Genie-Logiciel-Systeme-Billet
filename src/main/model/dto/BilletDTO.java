@@ -1,5 +1,7 @@
-package model;
+package model.dto;
 
+import model.dataModel.Gravity;
+import model.dataModel.HistoriqueBillet;
 import model.state.stateBillet.StateBillet;
 
 import java.text.SimpleDateFormat;

@@ -1,6 +1,9 @@
 package persistence;
 
-import model.*;
+import model.dataModel.Billet;
+import model.dataModel.Gravity;
+import model.dataModel.Projet;
+import model.dataModel.Usager;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

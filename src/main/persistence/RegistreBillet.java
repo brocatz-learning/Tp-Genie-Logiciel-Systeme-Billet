@@ -1,14 +1,12 @@
 package persistence;
 
-import model.Billet;
-import model.Filtre;
-import model.state.stateBillet.StateOuvert;
+import model.dataModel.Billet;
+import model.dataModel.Filtre;
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;

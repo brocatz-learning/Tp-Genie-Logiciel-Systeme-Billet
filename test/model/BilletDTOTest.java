@@ -1,7 +1,10 @@
 package model;
 
-import model.state.stateBillet.StateBillet;
-import model.state.stateBillet.StateOuvert;
+import model.dataModel.Billet;
+import model.dataModel.Gravity;
+import model.dto.BilletDTO;
+import model.dto.ProjetDTO;
+import model.dto.UsagerDTO;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
