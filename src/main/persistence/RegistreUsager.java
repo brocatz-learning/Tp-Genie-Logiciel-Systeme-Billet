@@ -3,6 +3,7 @@ package persistence;
 import model.dataModel.Usager;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,6 +33,7 @@ public class RegistreUsager {
         if (validationChampUsager(usager) ) {
             isUserAdded = true;
             usager.setId(listUsager.size() + 1);
+            usager.setDateCreation(new Date());
             this.listUsager.add(usager);
         }
 

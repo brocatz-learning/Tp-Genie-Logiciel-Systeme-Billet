@@ -3,6 +3,7 @@ package persistence;
 import model.dataModel.Projet;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class RegistreProjet {
@@ -25,6 +26,7 @@ public class RegistreProjet {
     public boolean addProjet(Projet projet) {
 
         projet.setId(listProjet.size() + 1);
+        projet.setDateCreation(new Date());
         return listProjet.add(projet);
     }
 

@@ -36,9 +36,11 @@ public abstract class StateBillet {
 
 
     public  void mettreEnAttenteDeployement(Usager usager,String commentaire) {
+        billet.setEtatBillet(new StateEnAttenteDeploy(billet));
         insertHistoriqueBillet(usager,commentaire,billet.getEtatBillet());
     }
     public void mettreEnTravailEnCours(Usager usager,String commentaire) {
+        billet.setEtatBillet(new StateTravailEnCours(billet));
         insertHistoriqueBillet(usager,commentaire,billet.getEtatBillet());
     }
 

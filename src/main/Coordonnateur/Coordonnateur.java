@@ -4,6 +4,7 @@ import exception.*;
 ;
 import facade.FacadeApplication;
 import model.dataModel.Filtre;
+import model.dataModel.FiltreEtatBillet;
 import model.dto.BilletDTO;
 import model.dto.ProjetDTO;
 import model.dto.UsagerDTO;
@@ -108,7 +109,7 @@ public class Coordonnateur {
         }
     }
 
-    public void createAssignation( String nomProjet,String emailUsagerTechnique) throws ProjetNotAssignableToUserExeception {
+    public void createAssignationProjet(String nomProjet, String emailUsagerTechnique) throws ProjetNotAssignableToUserExeception {
         boolean isEmailValid = facadeApplication.isEmailInEnRegistre(emailUsagerTechnique);
         boolean isProjetValid = facadeApplication.isProjetDuplicated(nomProjet);
         if (isEmailValid == false) {
@@ -147,5 +148,49 @@ public class Coordonnateur {
 
 
         return listFiltreDTO;
+    }
+
+    public void createAssignationBillet(int idBillet, String emailUsagerTechique) throws BilletNotExistException,
+            UserNotVaildExeption, AssignationBIlletException {
+
+        boolean isBilletExist = facadeApplication.isBilletExist(idBillet);
+        if (isBilletExist == false) {
+            throw new BilletNotExistException("Billet non existant");
+        }
+
+        boolean isEmailValid = facadeApplication.isEmailInEnRegistre(emailUsagerTechique);
+        if (isEmailValid == false) {
+            throw new UserNotVaildExeption("Email non valide");
+        }
+
+        boolean isAssignationCreated = facadeApplication.createAssignationBillet(idBillet, emailUsagerTechique);
+        if (isAssignationCreated == false) {
+            throw new AssignationBIlletException("Erreur interne Assignation non créé");
+        }
+    }
+
+    public void updateEtatBillet(int idBillet, int choixEtat, String emailUsager, String note) throws BilletNotExistException, StateNotValidException, UserNotVaildExeption {
+
+        FiltreEtatBillet filtreEtatBillet = FiltreEtatBillet.fromId(choixEtat);
+        if (filtreEtatBillet == null) {
+            throw new StateNotValidException("Choix etat usager non valide");
+        }
+
+        boolean isUserExist = facadeApplication.isEmailInEnRegistre(emailUsager);
+        if (isUserExist == false) {
+            throw new UserNotVaildExeption("Email non valide");
+        }
+
+
+
+        boolean isBilletExist = facadeApplication.isBilletExist(idBillet);
+        if (isBilletExist == false) {
+            throw new BilletNotExistException("Billet non existant");
+        }
+
+        boolean isStateChanged = facadeApplication.updateEtatBillet(idBillet, filtreEtatBillet, emailUsager, note);
+        if (isStateChanged == false) {
+            throw new StateNotValidException("Etat non modifié");
+        }
     }
 }

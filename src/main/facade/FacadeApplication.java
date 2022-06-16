@@ -97,12 +97,18 @@ public class FacadeApplication {
             BilletDTO billetDTO = new BilletDTO();
             billetDTO.setId(billet.getId());
             billetDTO.setNote(billet.getNote());
-            billetDTO.setPersonneEnCharger(billet.getPersonneEnCharger().asDTO());
+
+            if (billet.getPersonneEnCharger() != null)
+                billetDTO.setPersonneEnCharger(billet.getPersonneEnCharger().asDTO());
+
             billetDTO.setDemandeur(billet.getDemandeur().asDTO());
             billetDTO.setCategory(billet.getCategory());
             billetDTO.setGravity(billet.getGravity());
             billetDTO.setEtatBillet(billet.getEtatBillet());
             billetDTO.setDateCreation(billet.getDateCreationBillet());
+            billetDTO.setHistoriqueBillets(billet.getHistoriqueBillets());
+            billetDTO.setProjet(billet.getProjet().asDTO());
+            billetDTO.setDateAssignation(billet.getDateAssignationBillet());
             listeBilletDTO.add(billetDTO);
         });
 
@@ -115,5 +121,17 @@ public class FacadeApplication {
 
     public boolean isCategoryExist(String category) {
         return servicePeristence.isCateogrieInRegistre(category);
+    }
+
+    public boolean isBilletExist(int idBillet) {
+        return servicePeristence.isBilletExist(idBillet);
+    }
+
+    public boolean createAssignationBillet(int idBillet, String emailUsagerTechique) {
+        return servicePeristence.createAssignationBillet(idBillet, emailUsagerTechique);
+    }
+
+    public boolean updateEtatBillet(int idBillet, FiltreEtatBillet choixEtat,String emailUsagerTechique,String note) {
+        return servicePeristence.updateEtatBillet(idBillet, choixEtat,emailUsagerTechique,note);
     }
 }

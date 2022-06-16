@@ -36,7 +36,10 @@ public class Billet {
     public Billet(BilletDTO billetDTO) {
         this.setId(billetDTO.getId());
         this.setNote(billetDTO.getNote());
-        this.setPersonneEnCharger(new Usager(billetDTO.getPersonneEnCharger()));
+
+        if (billetDTO.getPersonneEnCharger() != null)
+            this.setPersonneEnCharger(new Usager(billetDTO.getPersonneEnCharger()));
+
         this.setDemandeur(new Usager(billetDTO.getDemandeur()));
         this.setEtatBillet(billetDTO.getEtatBillet());
         this.setGravity(billetDTO.getGravity());
@@ -59,6 +62,9 @@ public class Billet {
         this.dateCreationBillet = new Date();
         this.historiqueBillets = new ArrayList<>();
     }
+
+
+
 
     public int getId() {
         return id;
@@ -140,6 +146,14 @@ public class Billet {
         this.dateCreationBillet = dateCreationBillet;
     }
 
+    public Date getDateAssignationBillet() {
+        return dateAssignationBillet;
+    }
+
+    public void setDateAssignationBillet(Date dateAssignationBillet) {
+        this.dateAssignationBillet = dateAssignationBillet;
+    }
+
 
 
     public BilletDTO asDTO () {
@@ -155,5 +169,22 @@ public class Billet {
         dto.setHistoriqueBillets(this.historiqueBillets);
         return dto;
 
+    }
+
+    @Override
+    public String toString() {
+        return "Billet{" +
+                "id=" + id +
+                ", note='" + note + '\'' +
+                ", personneEnCharger=" + personneEnCharger +
+                ", demandeur=" + demandeur +
+                ", etatBillet=" + etatBillet +
+                ", gravity=" + gravity +
+                ", category='" + category + '\'' +
+                ", projet=" + projet +
+                ", historiqueBillets=" + historiqueBillets +
+                ", dateCreationBillet=" + dateCreationBillet +
+                ", dateAssignationBillet=" + dateAssignationBillet +
+                '}';
     }
 }

@@ -15,6 +15,8 @@ import utile.ConsoleColors;
 import java.util.List;
 import java.util.Scanner;
 
+import static model.dataModel.Filtre.Etat;
+
 public class Presentation {
 
     // Ne pas fermer les classe scanner
@@ -73,6 +75,12 @@ public class Presentation {
                     break;
                 case 5:
                     afficherMenuCreationBillet();
+                    break;
+                    case 6:
+                        afficherMenuAssignationBillet();
+                    break;
+                case 7:
+                    afficherMenuChangerEtatBillet();
                     break;
                 case 8:
                     afficherMenuConsulterListeBillet();
@@ -187,7 +195,7 @@ public class Presentation {
         String emailUsagerTechique = scanner.next();
 
         try {
-            coordonnateur.createAssignation(nomProjet, emailUsagerTechique);
+            coordonnateur.createAssignationProjet(nomProjet, emailUsagerTechique);
             System.out.println(ConsoleColors.GREEN + "L'assignation a ete effectue avec succès" + ConsoleColors.RESET);
         } catch (ProjetNotAssignableToUserExeception e) {
             System.out.println(ConsoleColors.RED + e.getMessage() + ConsoleColors.RESET);
@@ -216,7 +224,7 @@ public class Presentation {
 
     }
 
-    // 6 TODO Completed : Menu Creation Billet
+    // 5 TODO Completed : Menu Creation Billet
 
     public static void afficherMenuCreationBillet() {
 
@@ -279,7 +287,7 @@ public class Presentation {
 
             ProjetDTO projetDTO = new ProjetDTO();
             UsagerDTO usagerdemandeur = new UsagerDTO();
-            UsagerDTO usagerenCharge = new UsagerDTO();
+//            UsagerDTO usagerenCharge = new UsagerDTO();
 
             usagerdemandeur.setEmail(emailDemandeur);
 //            usagerenCharge.setEmail(emailEnCharge);
@@ -289,7 +297,7 @@ public class Presentation {
 
             BilletDTO billetDTO = new BilletDTO();
             billetDTO.setNote(note);
-            billetDTO.setPersonneEnCharger(usagerenCharge);
+//            billetDTO.setPersonneEnCharger(usagerenCharge);
             billetDTO.setDemandeur(usagerdemandeur);
             billetDTO.setProjet(projetDTO);
             billetDTO.setCategory(nomCategorie);
@@ -315,6 +323,94 @@ public class Presentation {
 
     }
 
+    // 6
+    public static void afficherMenuAssignationBillet () {
+        System.out.println("Menu assignation d'un billet a un usager technique");
+        System.out.println("--------------------------------------");
+
+        System.out.println("Veuillez entrez l'id du billet ");
+
+        int idBillet = 0;
+
+        while(!scanner.hasNextInt()) {
+            if (!scanner.hasNextInt()) {
+                System.out.println( ConsoleColors.RED + "\nErreur veuillez entrez une valeur numeric\n" + ConsoleColors.RESET);
+                scanner.nextLine();
+            } else {
+                idBillet = scanner.nextInt();
+            }
+        }
+
+        idBillet = scanner.nextInt();
+
+
+        System.out.println("Veuillez entrez l'email de l'usager technique");
+        String emailUsagerTechique = scanner.next();
+
+        try {
+            coordonnateur.createAssignationBillet(idBillet, emailUsagerTechique);
+            System.out.println(ConsoleColors.GREEN + "L'assignation a ete effectue avec succès" + ConsoleColors.RESET);
+        } catch (Exception e) {
+            System.out.println(ConsoleColors.RED + e.getMessage() + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.RED + "L'assignation n'a pas été effectue" + ConsoleColors.RESET);
+        }
+    }
+
+    // 7 Changer l'etat d'un billet
+    public static void afficherMenuChangerEtatBillet () {
+        System.out.println("Menu changement d'etat d'un billet");
+        System.out.println("--------------------------------------");
+
+
+        System.out.println("Veuillez entrez l'email de l'usager technique");
+        String emailUsagerTechique = scanner.next();
+
+        System.out.println("Veuillez entrez la note du billet ");
+        String note = scanner.next();
+
+        int idBillet = 0;
+        System.out.println("Veuillez entrez l'id du billet ");
+
+        boolean isNumberEntre = false;
+        while (isNumberEntre == false) {
+            if (!scanner.hasNextInt()) {
+                System.out.println( ConsoleColors.RED + "\nErreur veuillez entrez une valeur numeric" + ConsoleColors.RESET);
+                scanner.next();
+            } else {
+                idBillet = scanner.nextInt();
+                isNumberEntre = true;
+            }
+        }
+
+        int choixEtat = -1;
+
+        System.out.println("Veuillez entrez l'etat du billet :");
+        System.out.println("1 - Ouvert");
+        System.out.println("2 - Travail En cours");
+        System.out.println("3 - Bloqué");
+        System.out.println("4 - En attente de deploiement");
+        System.out.println("5 - Fermé");
+
+        while (!ChoixEtat.optionsEtat.contains(choixEtat)) {
+            if (!scanner.hasNextInt()) {
+                System.out.println( ConsoleColors.RED + "\nErreur veuillez entrez une valeur numeric entre 1 et 5\n" + ConsoleColors.RESET);
+                scanner.nextLine();
+            } else {
+                choixEtat = scanner.nextInt();
+            }
+        }
+
+        try {
+            coordonnateur.updateEtatBillet(idBillet, choixEtat, emailUsagerTechique, note);
+            System.out.println(ConsoleColors.GREEN + "L'etat du billet a ete modifie avec succès" + ConsoleColors.RESET);
+        } catch (Exception e) {
+            System.out.println(ConsoleColors.RED + e.getMessage() + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.RED + "L'etat du billet n'a pas été modifie" + ConsoleColors.RESET);
+        }
+
+
+    }
+
     // 8 Consulter la liste des billets
     public static void afficherMenuConsulterListeBillet () {
         System.out.println("Menu consulter la liste des billets");
@@ -326,9 +422,9 @@ public class Presentation {
         System.out.println("2 - Demandeeur");
         System.out.println("3 - Etat");
         System.out.println("4 - Personne en charge");
-        System.out.println("5 - Gravité");
-        System.out.println("6 - Projet");
-        System.out.println("7 - Categorie");
+        System.out.println("5 - Projet");
+        System.out.println("6 - Categorie");
+        System.out.println("7 - Gravité");
 
         int choix = -1;
 

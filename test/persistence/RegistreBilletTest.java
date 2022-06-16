@@ -50,8 +50,11 @@ class RegistreBilletTest {
 
     @Test
     void testGetDateOuverture() {
-        List<Billet> list = registreBillet.filtreBillet(Filtre.DateOuverture, "2021dsv2-06-12");
-        assertTrue(list.size() > 0);
+        assertThrows(Exception.class, () -> {
+            List<Billet> list = registreBillet.filtreBillet(Filtre.DateOuverture, "2021dsv2-06-12");
+        });
+
+
     }
 
     @Test

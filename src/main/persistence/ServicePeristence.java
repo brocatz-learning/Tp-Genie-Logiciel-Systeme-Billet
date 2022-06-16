@@ -1,10 +1,10 @@
 package persistence;
 
-import model.dataModel.Billet;
-import model.dataModel.Filtre;
-import model.dataModel.Projet;
-import model.dataModel.Usager;
+import model.dataModel.*;
+import model.state.stateBillet.StateBillet;
+import model.state.stateBillet.StateFactory;
 
+import java.util.Date;
 import java.util.List;
 
 public class ServicePeristence {
@@ -90,6 +90,58 @@ public class ServicePeristence {
 
     public List<Billet> consulterListeBillet(Filtre filtre, String valeur) {
         return registreBillet.filtreBillet(filtre, valeur);
+    }
+
+    public boolean isBilletExist(int idBillet) {
+        return registreBillet.isBilletExist(idBillet);
+    }
+
+    public boolean createAssignationBillet(int idBillet, String emailUsagerTechique) {
+        Usager usager = registreUsager.findByEmail(emailUsagerTechique);
+        Billet billet = registreBillet.findById(idBillet);
+
+        if (usager == null || billet == null) {
+            return false;
+        }
+        billet.setDateAssignationBillet(new Date());
+        billet.setPersonneEnCharger(usager);
+
+        return true;
+    }
+
+    public boolean updateEtatBillet(int idBillet, FiltreEtatBillet choixEtat, String emailUsagerTechique, String note) {
+        Billet billet = registreBillet.findById(idBillet);
+        Usager usager = registreUsager.findByEmail(emailUsagerTechique);
+        if (billet == null && usager == null) {
+            return false;
+        }
+
+        StateBillet state = StateFactory.buildState(billet, choixEtat);
+
+        if (billet.getEtatBillet().getCurrentState() == state.getCurrentState()) {
+            return false;
+        }
+
+
+
+        switch (choixEtat) {
+            case StateOuvert:
+                billet.getEtatBillet().ouvrirBillet(usager, note);
+                break;
+            case StateTravailEnCours:
+                billet.getEtatBillet().mettreEnTravailEnCours(usager, note);
+                break;
+            case StateBloque:
+                billet.getEtatBillet().bloquerBillet(usager, note);
+                break;
+            case StateEnAttente:
+                billet.getEtatBillet().mettreEnAttenteDeployement(usager, note);
+                break;
+            case StateFerme:
+                billet.getEtatBillet().fermerBillet(usager, note);
+        }
+
+        return true;
     }
 }
 

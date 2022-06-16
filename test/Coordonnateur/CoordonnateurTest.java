@@ -17,6 +17,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 class CoordonnateurTest {
 
     private static Coordonnateur coordonnateur;
@@ -37,6 +38,15 @@ class CoordonnateurTest {
         usagerDTO.setUsername("jmaxi");
         usagerDTO.setPassword("12345678");
 
+        UsagerDTO usagerDTO2 = new UsagerDTO();
+        usagerDTO2.setId(2);
+        usagerDTO2.setEmail("yoyo@gmail.com" );
+        usagerDTO2.setNom("Yoyo");
+        usagerDTO2.setPrenom("Yoyo");
+        usagerDTO2.setUsername("yoyo");
+        usagerDTO2.setPassword("12345678");
+
+
 
         BilletDTO billetDTO = new BilletDTO();
         billetDTO.setNote("Probleme d'affichage");
@@ -47,6 +57,7 @@ class CoordonnateurTest {
         billetDTO.setProjet(projetDTO);
 
         coordonnateur.createUsager(usagerDTO, 1);
+        coordonnateur.createUsager(usagerDTO2, 2);
         coordonnateur.createProjet(projetDTO);
         for (int i = 0; i < 10; i++) {
             coordonnateur.createBillet(billetDTO);
@@ -219,7 +230,42 @@ class CoordonnateurTest {
     void consulterListeBillet() throws FiltreNotValidException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
+        String dateString = sdf.format(date);
         List<BilletDTO> list =
-                coordonnateur.consulterListeBillet("",1);
+                coordonnateur.consulterListeBillet(dateString,1);
+        list.forEach(billetDTO -> {
+            System.out.println(billetDTO);
+        });
     }
+
+    @Test
+    void createAssignationProjet() throws BilletNotExistException, AssignationBIlletException, UserNotVaildExeption, FiltreNotValidException {
+
+        int idBillet = 1;
+        String email = "yoyo@gmail.com";
+        assertDoesNotThrow(() -> {
+            coordonnateur.createAssignationBillet(idBillet, email);
+        });
+
+        Date date = new Date();
+        String dateString = new SimpleDateFormat("yyyy-MM-dd").format(date);
+        coordonnateur.consulterListeBillet(dateString,1).forEach(billetDTO -> {
+            System.out.println(billetDTO);
+        });
+
+    }
+
+    @Test
+    void updateEtatBilletOuvertAOuvert() {
+        assertThrows(Exception.class, () -> {
+            coordonnateur.updateEtatBillet(1, 1,"yoyo@gmail.com", "Probleme résolu");
+        });
+    }
+
+    @Test
+    void updateEtatBilletOvertAAutre()  {
+        assertDoesNotThrow(() -> {
+            coordonnateur.updateEtatBillet(1, 2,"yoyo@gmail.com", "Probleme résolu");
+        });
+   }
 }

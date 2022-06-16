@@ -36,7 +36,7 @@ public class RegistreBillet {
 
     public boolean addBillet(Billet billet) {
         billet.setId(listBillet.size() + 1);
-
+        billet.setDateCreationBillet(new Date());
         boolean isAdded = listBillet.add(billet);
 
         return isAdded;
@@ -110,5 +110,17 @@ public class RegistreBillet {
         }
 
         return listARetourner;
+    }
+
+    public boolean isBilletExist(int idBillet) {
+        return listBillet.stream()
+                .anyMatch(billet -> billet.getId() == idBillet);
+    }
+
+    public Billet findById(int idBillet) {
+        return listBillet.stream()
+                .filter(billet -> billet.getId() == idBillet)
+                .findFirst()
+                .orElse(null);
     }
 }
