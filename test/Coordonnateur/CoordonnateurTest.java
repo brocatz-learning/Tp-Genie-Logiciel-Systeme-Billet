@@ -10,6 +10,7 @@ import model.dto.ProjetDTO;
 import model.dto.UsagerDTO;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import presentation.formattage.FormatBilletDTO;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,6 +38,7 @@ class CoordonnateurTest {
         usagerDTO.setPrenom("James");
         usagerDTO.setUsername("jmaxi");
         usagerDTO.setPassword("12345678");
+        usagerDTO.setDateCreation(new Date());
 
         UsagerDTO usagerDTO2 = new UsagerDTO();
         usagerDTO2.setId(2);
@@ -45,26 +47,34 @@ class CoordonnateurTest {
         usagerDTO2.setPrenom("Yoyo");
         usagerDTO2.setUsername("yoyo");
         usagerDTO2.setPassword("12345678");
+        usagerDTO2.setDateCreation(new Date());
 
 
 
         BilletDTO billetDTO = new BilletDTO();
         billetDTO.setNote("Probleme d'affichage");
         billetDTO.setDemandeur(usagerDTO);
-        billetDTO.setPersonneEnCharger(usagerDTO);
+        billetDTO.setPersonneEnCharger(usagerDTO2);
         billetDTO.setCategory("Bug");
         billetDTO.setGravity(Gravity.Moyenne);
         billetDTO.setProjet(projetDTO);
+        billetDTO.setDateCreation(new Date());
 
         coordonnateur.createUsager(usagerDTO, 1);
         coordonnateur.createUsager(usagerDTO2, 2);
         coordonnateur.createProjet(projetDTO);
+
+
+        coordonnateur.createAssignationProjet(projetDTO.getNom(), usagerDTO.getEmail());
         for (int i = 0; i < 10; i++) {
             coordonnateur.createBillet(billetDTO);
         }
         coordonnateur.createBillet(billetDTO);
 
 
+        coordonnateur.updateEtatBillet(1,3,usagerDTO.getEmail(),"Allo");
+        Thread.sleep(3000);
+        coordonnateur.updateEtatBillet(1,2,usagerDTO.getEmail(),"YaYA");
 
 
     }
@@ -268,4 +278,16 @@ class CoordonnateurTest {
             coordonnateur.updateEtatBillet(1, 2,"yoyo@gmail.com", "Probleme résolu");
         });
    }
+
+    @Test
+    void testConsulterListeBilletParID() throws BilletNotExistException {
+
+       BilletDTO billetDTO = coordonnateur.consulterDetailBilletParId(1);
+       if (billetDTO != null) {
+           System.out.println(FormatBilletDTO.getBilletDetails(billetDTO));
+       }
+       assertNotNull(billetDTO);
+    }
+
+
 }

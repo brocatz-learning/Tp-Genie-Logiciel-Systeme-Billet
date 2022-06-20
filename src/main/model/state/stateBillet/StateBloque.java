@@ -10,7 +10,7 @@ public class StateBloque extends StateBillet {
 
     @Override
     public String getCurrentState() {
-        return null;
+        return this.getClass().getSimpleName();
     }
 
 

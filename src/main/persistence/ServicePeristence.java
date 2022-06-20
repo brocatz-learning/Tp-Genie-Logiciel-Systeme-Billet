@@ -143,6 +143,10 @@ public class ServicePeristence {
 
         return true;
     }
+
+    public Billet consulterDetailBilletParId(int idBillet) {
+        return registreBillet.findById(idBillet);
+    }
 }
 
 

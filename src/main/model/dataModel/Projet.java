@@ -86,6 +86,7 @@ public class Projet {
         projetDTO.setNom(this.nom);
         projetDTO.setDateCreation(this.dateCreation);
         projetDTO.setDescription(this.description);
+        projetDTO.setListUsager(this.listUsager);
         return projetDTO;
     }
 }

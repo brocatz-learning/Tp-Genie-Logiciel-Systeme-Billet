@@ -134,4 +134,24 @@ public class FacadeApplication {
     public boolean updateEtatBillet(int idBillet, FiltreEtatBillet choixEtat,String emailUsagerTechique,String note) {
         return servicePeristence.updateEtatBillet(idBillet, choixEtat,emailUsagerTechique,note);
     }
+
+    public BilletDTO consulterDetailBilletParId(int idBillet) {
+        Billet billet = servicePeristence.consulterDetailBilletParId(idBillet);
+        BilletDTO billetDTO = new BilletDTO();
+        billetDTO.setId(billet.getId());
+        billetDTO.setNote(billet.getNote());
+
+        if (billet.getPersonneEnCharger() != null)
+            billetDTO.setPersonneEnCharger(billet.getPersonneEnCharger().asDTO());
+
+        billetDTO.setDemandeur(billet.getDemandeur().asDTO());
+        billetDTO.setCategory(billet.getCategory());
+        billetDTO.setGravity(billet.getGravity());
+        billetDTO.setEtatBillet(billet.getEtatBillet());
+        billetDTO.setDateCreation(billet.getDateCreationBillet());
+        billetDTO.setHistoriqueBillets(billet.getHistoriqueBillets());
+        billetDTO.setProjet(billet.getProjet().asDTO());
+        billetDTO.setDateAssignation(billet.getDateAssignationBillet());
+        return billetDTO;
+    }
 }

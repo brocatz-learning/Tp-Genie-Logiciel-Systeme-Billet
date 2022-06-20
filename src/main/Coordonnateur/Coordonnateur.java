@@ -193,4 +193,20 @@ public class Coordonnateur {
             throw new StateNotValidException("Etat non modifié");
         }
     }
+
+    public BilletDTO consulterDetailBilletParId(int idBillet) throws BilletNotExistException {
+
+        boolean isBilletExist = facadeApplication.isBilletExist(idBillet);
+
+        if (isBilletExist == false) {
+            throw new BilletNotExistException("Billet non existant");
+        }
+
+        BilletDTO billetDTO = facadeApplication.consulterDetailBilletParId(idBillet);
+        if (billetDTO == null) {
+            throw new BilletNotExistException("Erreur interne Billet non trouvé");
+        }
+
+        return billetDTO;
+    }
 }

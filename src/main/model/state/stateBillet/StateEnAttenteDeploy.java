@@ -7,7 +7,6 @@ public class StateEnAttenteDeploy extends StateBillet {
 
     public StateEnAttenteDeploy(Billet billet) {
         super(billet);
-         this.getClass().getSimpleName();
     }
 
     @Override

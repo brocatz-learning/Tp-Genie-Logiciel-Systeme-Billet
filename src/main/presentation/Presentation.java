@@ -311,16 +311,6 @@ public class Presentation {
             System.out.println(ConsoleColors.RED + "Le billet n'a pas été créé" + ConsoleColors.RESET);
         }
 
-
-
-
-
-
-
-
-
-
-
     }
 
     // 6
@@ -463,5 +453,45 @@ public class Presentation {
                 System.out.println(listBilletFormatted);
             }
         }
+    }
+
+
+    // 9 Consulter la liste des billets
+
+    public static void afficherMenuConsulterDetailBilletParId () {
+        System.out.println("Menu consulter le detail d'un billet par");
+        System.out.println("--------------------------------------");
+
+        System.out.println("Veuillez entrez l'id du billet ");
+        String idBillet = scanner.next();
+
+        int idBilletInt = 0;
+
+        boolean isNumberEntre = false;
+
+        while (isNumberEntre == false) {
+            if (!scanner.hasNextInt()) {
+                System.out.println( ConsoleColors.RED + "\nErreur veuillez entrez une valeur numeric" + ConsoleColors.RESET);
+                scanner.next();
+            } else {
+                idBilletInt = scanner.nextInt();
+                isNumberEntre = true;
+            }
+        }
+
+        BilletDTO billetDTO = null;
+        try {
+            billetDTO = coordonnateur.consulterDetailBilletParId(idBilletInt);
+            System.out.println(ConsoleColors.GREEN + "Le detail du billet a ete affiche avec succès" + ConsoleColors.RESET);
+
+        } catch (Exception e) {
+            System.out.println(ConsoleColors.RED + e.getMessage() + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.RED + "Le detail du billet n'a pas été affiché" + ConsoleColors.RESET);
+        }
+
+
+
+
+
     }
 }

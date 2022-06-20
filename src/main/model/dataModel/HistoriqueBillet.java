@@ -18,4 +18,36 @@ public class HistoriqueBillet {
         this.commentaire = commentaire;
         this.date = date;
     }
+
+    public StateBillet getStateBillet() {
+        return stateBillet;
+    }
+
+    public void setStateBillet(StateBillet stateBillet) {
+        this.stateBillet = stateBillet;
+    }
+
+    public Usager getUsager() {
+        return usager;
+    }
+
+    public void setUsager(Usager usager) {
+        this.usager = usager;
+    }
+
+    public String getCommentaire() {
+        return commentaire;
+    }
+
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }
