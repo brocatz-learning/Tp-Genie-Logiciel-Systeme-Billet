@@ -47,7 +47,7 @@ public class Presentation {
             System.out.println("6: Assigner un billet a un usager technique");
             System.out.println("7: Changer l'etat d'un billet");
             System.out.println("8: Consulter la liste des billets filtres");
-            System.out.println("9: Consulter la liste des billets non par id");
+            System.out.println("9: Consulter le detail d'un billet par  id");
 
             System.out.println("0: Quitter le programme");
 
@@ -85,13 +85,18 @@ public class Presentation {
                 case 8:
                     afficherMenuConsulterListeBillet();
                     break;
+                case 9:
+                    afficherMenuConsulterDetailBilletParId();
+                    break;
                 default:
                     System.out.println(ConsoleColors.RED + "\nErreur veuillez entrez une option entre 0 et 9\n"
                             + ConsoleColors.RESET);
             }
 
             // On doit reinitialser la reponse pour le prochain tour
-            reponse = 0;
+            // Si l'usager choisi 0 on quitte le programme
+            // en assignant la valeur -1 a la variable reponse
+            reponse = (reponse == -1) ? -1 : 0; //
 
         }
 
@@ -305,6 +310,8 @@ public class Presentation {
 
 
             coordonnateur.createBillet(billetDTO);
+            int idBillet = coordonnateur.getLastBilletId();
+            System.out.println(ConsoleColors.BLUE_BOLD + "L'id du billet est : " + idBillet + ConsoleColors.RESET);
             System.out.println(ConsoleColors.GREEN + "Le billet a w créé avec succès" + ConsoleColors.RESET);
         } catch (Exception e) {
             System.out.println(ConsoleColors.RED + e.getMessage() + ConsoleColors.RESET);
@@ -459,25 +466,18 @@ public class Presentation {
     // 9 Consulter la liste des billets
 
     public static void afficherMenuConsulterDetailBilletParId () {
-        System.out.println("Menu consulter le detail d'un billet par");
+        System.out.println("Menu consulter le detail d'un billet par id");
         System.out.println("--------------------------------------");
 
         System.out.println("Veuillez entrez l'id du billet ");
-        String idBillet = scanner.next();
+        int idBilletInt = -1;
 
-        int idBilletInt = 0;
-
-        boolean isNumberEntre = false;
-
-        while (isNumberEntre == false) {
-            if (!scanner.hasNextInt()) {
-                System.out.println( ConsoleColors.RED + "\nErreur veuillez entrez une valeur numeric" + ConsoleColors.RESET);
-                scanner.next();
-            } else {
-                idBilletInt = scanner.nextInt();
-                isNumberEntre = true;
-            }
+        while (!scanner.hasNextInt()) {
+            System.out.println( ConsoleColors.RED + "\nErreur veuillez entrez une valeur numeric" + ConsoleColors.RESET);
+            scanner.next();
         }
+
+        idBilletInt = scanner.nextInt();
 
         BilletDTO billetDTO = null;
         try {
@@ -487,6 +487,13 @@ public class Presentation {
         } catch (Exception e) {
             System.out.println(ConsoleColors.RED + e.getMessage() + ConsoleColors.RESET);
             System.out.println(ConsoleColors.RED + "Le detail du billet n'a pas été affiché" + ConsoleColors.RESET);
+        }
+
+        if (billetDTO != null) {
+            System.out.println(ConsoleColors.GREEN + "Le detail du billet" + ConsoleColors.RESET);
+            System.out.println("--------------------------------------");
+            String billetFormatted = FormatBilletDTO.getBilletDetails(billetDTO);
+            System.out.println(billetFormatted);
         }
 
 

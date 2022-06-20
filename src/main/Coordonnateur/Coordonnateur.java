@@ -69,6 +69,9 @@ public class Coordonnateur {
 
     public void createBillet (BilletDTO billetDTO) throws UserNotVaildExeption, BilletNotCreatableExeception, ProjetNotValidExeception {
 
+        //Verification avant de creer le billet
+        ValidationBillet.validationBilletDTO(billetDTO);
+
         boolean isDemandeurExist = facadeApplication.isEmailInEnRegistre(billetDTO.getDemandeur().getEmail());
 //        boolean isPersonneEnChargerExist = facadeApplication.isEmailInEnRegistre(billetDTO.getPersonneEnCharger().getEmail());
         boolean isProjetExist = facadeApplication.isProjetExist(billetDTO.getProjet().getNom());
@@ -208,5 +211,9 @@ public class Coordonnateur {
         }
 
         return billetDTO;
+    }
+
+    public int getLastBilletId() {
+        return facadeApplication.getLastBilletId();
     }
 }

@@ -154,4 +154,8 @@ public class FacadeApplication {
         billetDTO.setDateAssignation(billet.getDateAssignationBillet());
         return billetDTO;
     }
+
+    public int getLastBilletId() {
+        return servicePeristence.getLastBilletId();
+    }
 }

@@ -147,6 +147,10 @@ public class ServicePeristence {
     public Billet consulterDetailBilletParId(int idBillet) {
         return registreBillet.findById(idBillet);
     }
+
+    public int getLastBilletId() {
+        return registreBillet.getSize();
+    }
 }
 
 
