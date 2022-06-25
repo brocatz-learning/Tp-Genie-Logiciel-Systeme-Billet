@@ -1,5 +1,7 @@
 package presentation;
 
+import utile.ConsoleColors;
+
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -65,12 +67,12 @@ public class OptionsFiltreBillet {
     }
 
     public static String affichageSousMenuEtat() {
-        System.out.print("Veuillez entrez un etat en text plaine\n");
-        System.out.println("1 - stateEnAttenteDeploy");
-        System.out.println("2 - statefermer");
-        System.out.println("3 - stateOuvert");
-        System.out.println("4 - stateTravailEnCours");
-        System.out.println("5 - stateBloque");
+        System.out.print("Veuillez entrez un" + ConsoleColors.PURPLE_BOLD + " etat en text plaine " + ConsoleColors.RESET +"\n");
+        System.out.println("1-" + ConsoleColors.PURPLE_BOLD + " stateEnAttenteDeploy" + ConsoleColors.RESET);
+        System.out.println("2-" + ConsoleColors.PURPLE_BOLD + " statefermer" + ConsoleColors.RESET);
+        System.out.println("3-" + ConsoleColors.PURPLE_BOLD + " stateOuvert" + ConsoleColors.RESET);
+        System.out.println("4-" + ConsoleColors.PURPLE_BOLD + " stateTravailEnCours" + ConsoleColors.RESET);
+        System.out.println("5-" + ConsoleColors.PURPLE_BOLD + " stateBloque" + ConsoleColors.RESET);
         String etat = scanner.nextLine();
         return etat;
     }

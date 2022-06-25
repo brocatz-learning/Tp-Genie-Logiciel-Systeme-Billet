@@ -44,4 +44,8 @@ public class RegistreProjet {
     public int getSize() {
         return listProjet.size();
     }
+
+    public void clear() {
+        listProjet.clear();
+    }
 }

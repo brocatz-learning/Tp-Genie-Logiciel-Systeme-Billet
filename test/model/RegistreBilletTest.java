@@ -8,10 +8,12 @@ import model.state.stateBillet.StateEnAttenteDeploy;
 import model.state.stateBillet.StateFermer;
 import model.state.stateBillet.StateOuvert;
 import model.state.stateBillet.StateTravailEnCours;
+import notTestReset.ResetInternalDatabase;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import persistence.RegistreBillet;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,15 +27,18 @@ class RegistreBilletTest {
 
     @BeforeAll
     static void beforeAll() {
+        ResetInternalDatabase.resetInternalDataBase();
         registreBillet = RegistreBillet.getInstance();
 
-        Billet billet = new Billet("Probleme d'affichage", new Usager(), new Usager(),"Bug", Gravity.Faible, new Projet());
-        Billet billet1 = new Billet("Probleme d'affichage", new Usager(), new Usager(),"Bug",Gravity.Moyenne, new Projet());
-        Billet billet2 = new Billet("Probleme d'affichage", new Usager(), new Usager(),"Bug",Gravity.Elevee, new Projet());
-        Billet billet3 = new Billet("Probleme d'affichage", new Usager(), new Usager(),"Bug",Gravity.Moyenne, new Projet());
-        Billet billet4 = new Billet("Probleme d'affichage", new Usager(), new Usager(),"Bug",Gravity.Elevee, new Projet());
-        Billet billet5 = new Billet("Probleme d'affichage", new Usager(), new Usager(),"Bug",Gravity.Faible, new Projet());
-        Billet billet6 = new Billet("Probleme d'affichage", new Usager(), new Usager(),"Bug",Gravity.Faible, new Projet());
+        Usager usager = new Usager(1,"2w32,","343","3434","3434","3434",new Date());
+
+        Billet billet = new Billet("Probleme d'affichage", usager ,usager,"Bug", Gravity.Faible, new Projet());
+        Billet billet1 = new Billet("Probleme d'affichage", usager ,usager,"Bug",Gravity.Moyenne, new Projet());
+        Billet billet2 = new Billet("Probleme d'affichage", usager ,usager,"Bug",Gravity.Elevee, new Projet());
+        Billet billet3 = new Billet("Probleme d'affichage", usager ,usager,"Bug",Gravity.Moyenne, new Projet());
+        Billet billet4 = new Billet("Probleme d'affichage", usager ,usager,"Bug",Gravity.Elevee, new Projet());
+        Billet billet5 = new Billet("Probleme d'affichage", usager ,usager,"Bug",Gravity.Faible, new Projet());
+        Billet billet6 = new Billet("Probleme d'affichage", usager ,usager,"Bug",Gravity.Faible, new Projet());
 
 
         billet1.setEtatBillet(new StateTravailEnCours(billet));
@@ -49,7 +54,7 @@ class RegistreBilletTest {
 
 
 
-        Usager usager = new Usager();
+//        Usager usager = new Usager();
 
 //        UsagerDTO usagerDTO
 //

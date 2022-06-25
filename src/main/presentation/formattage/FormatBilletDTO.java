@@ -10,6 +10,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Classe qui permet de formatter les BilletsDTO
+ *
+ * @author Maxi
+ *
+ *
+ * */
+
 public class FormatBilletDTO {
 
     public static String formatListBilletDTO(List<BilletDTO> listBilletDTO) {

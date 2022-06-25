@@ -5,6 +5,7 @@ import model.dataModel.Gravity;
 import model.dto.BilletDTO;
 import model.dto.ProjetDTO;
 import model.dto.UsagerDTO;
+import notTestReset.ResetInternalDatabase;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,7 @@ class FacadeApplicationTest {
 
     @BeforeAll
     private static void beforeAll() {
+        ResetInternalDatabase.resetInternalDataBase();
         facadeApplication = new FacadeApplication();
 
         UsagerDTO usagerDTO = new UsagerDTO();
@@ -30,6 +32,7 @@ class FacadeApplicationTest {
         usagerDTO.setPrenom("Jean");
         usagerDTO.setUsername("jean");
         usagerDTO.setPassword("azerty");
+        usagerDTO.setDateCreation(new Date());
 
         facadeApplication.createUsager(usagerDTO, 1);
 

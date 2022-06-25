@@ -23,6 +23,7 @@ class BilletDTOTest {
         usagerDTO.setEmail("maxi@gmail.com" );
         usagerDTO.setNom("Maxime");
         usagerDTO.setPrenom("Leblanc");
+        usagerDTO.setDateCreation(new Date());
 
         UsagerDTO usagerDTO2 = new UsagerDTO();
         usagerDTO2.setUsername("username2");

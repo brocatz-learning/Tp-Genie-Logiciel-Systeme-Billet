@@ -20,6 +20,7 @@ public  class Usager implements Comparable<Usager> {
     private Date dateCreation;
 
     public Usager() {
+
     }
 
 

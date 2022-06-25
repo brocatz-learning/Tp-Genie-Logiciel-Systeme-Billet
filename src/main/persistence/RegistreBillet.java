@@ -34,6 +34,10 @@ public class RegistreBillet {
         return this.listBillet;
     }
 
+    public void clear() {
+        this.listBillet.clear();
+    }
+
     public boolean addBillet(Billet billet) {
         billet.setId(listBillet.size() + 1);
         billet.setDateCreationBillet(new Date());

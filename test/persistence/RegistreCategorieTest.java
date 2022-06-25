@@ -1,5 +1,6 @@
 package persistence;
 
+import notTestReset.ResetInternalDatabase;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +12,7 @@ class RegistreCategorieTest {
 
     @BeforeAll
     static void setUpBeforeClass() {
+        ResetInternalDatabase.resetInternalDataBase();
         registreCategorie = RegistreCategorie.getInstance();
 
     }
@@ -33,5 +35,11 @@ class RegistreCategorieTest {
     void testNotAddCategorie() {
         String categorie = "Bug";
         assertFalse(registreCategorie.addCategorie(categorie));
+    }
+
+    @Test
+    void clear() {
+        RegistreCategorie registreCategorie = RegistreCategorie.getInstance();
+
     }
 }

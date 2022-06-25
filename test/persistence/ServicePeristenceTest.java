@@ -2,6 +2,7 @@ package persistence;
 
 import model.dataModel.*;
 import model.state.stateBillet.StateOuvert;
+import notTestReset.ResetInternalDatabase;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,7 @@ class ServicePeristenceTest {
 
     @BeforeAll
     static void beforeAll() {
+        ResetInternalDatabase.resetInternalDataBase();
         servicePeristence = new ServicePeristence();
 
         Usager usager = new Usager();

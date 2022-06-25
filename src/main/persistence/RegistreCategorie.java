@@ -42,4 +42,17 @@ public class RegistreCategorie {
         return new ArrayList<String>(listCategorie);
     }
 
+    public void clear() {
+
+        Set<String> setToRemove = new TreeSet<String>();
+
+        for(String categorie : listCategorie) {
+            if(!categorie.equals("Bug".toLowerCase()) && !categorie.equals("Feature".toLowerCase()) &&
+                    !categorie.equals("Support".toLowerCase())) {
+               setToRemove.add(categorie);
+            }
+        }
+
+        listCategorie.removeAll(setToRemove);
+    }
 }

@@ -1,6 +1,7 @@
 package utile;
 
 /**
+ * Classe contenant les constantes de couleurs pour le terminal
  * <Author> shakram02  from stackoverflow</Author>
  *
  */
