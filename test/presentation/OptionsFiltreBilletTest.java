@@ -13,7 +13,7 @@ class OptionsFiltreBilletTest {
         // Format de la date : yyyyMMdd
         Pattern pattern = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
         String dateOuverture = "2019-01-01";
-        System.out.println("Entrez la date d'ouverture (yyyy-MM-dd) : ");
+//        System.out.println("Entrez la date d'ouverture (yyyy-MM-dd) : ");
         assertEquals(true, pattern.matcher(dateOuverture).matches());
     }
     @Test
@@ -21,7 +21,7 @@ class OptionsFiltreBilletTest {
         // Format de la date : yyyyMMdd
         Pattern pattern = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
         String dateOuverture = "342019-01-01";
-        System.out.println("Entrez la date d'ouverture (yyyy-MM-dd) : ");
+//        System.out.println("Entrez la date d'ouverture (yyyy-MM-dd) : ");
         assertNotEquals(true, pattern.matcher(dateOuverture).matches());
     }
 }

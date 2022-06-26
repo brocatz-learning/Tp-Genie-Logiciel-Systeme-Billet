@@ -1,7 +1,6 @@
 package Coordonnateur;
 
 import exception.*;
-;
 import facade.FacadeApplication;
 import model.dataModel.Filtre;
 import model.dataModel.FiltreEtatBillet;
@@ -11,6 +10,11 @@ import model.dto.UsagerDTO;
 
 import java.util.List;
 
+/**
+ *
+ * @author Maxi
+ *
+ * */
 public class Coordonnateur {
 
     private FacadeApplication facadeApplication = new FacadeApplication();
@@ -22,6 +26,9 @@ public class Coordonnateur {
      * @param usagerDTO
      * @throws UserNotVaildExeption
      */
+
+     // 1- TODO Completed Coordonnateur Creation Compte Usager
+    // Completed
     public void createUsager (UsagerDTO usagerDTO, int choixResponse) throws UserNotVaildExeption {
         ValidationUsager.validationUsagerDTO(usagerDTO);
 
@@ -36,6 +43,8 @@ public class Coordonnateur {
         }
     }
 
+    // 2 TODO Coordoonateur Creation Projet
+    // Completed
     public void createProjet(ProjetDTO projetDTO) throws ProjetNotValidExeception {
         ValidationProjet.validationProjetDTO(projetDTO);
 
@@ -67,6 +76,7 @@ public class Coordonnateur {
         }
     }
 
+    // 5 TODO Completed : Coordonnateur Creation Billet
     public void createBillet (BilletDTO billetDTO) throws UserNotVaildExeption, BilletNotCreatableExeception, ProjetNotValidExeception {
 
         //Verification avant de creer le billet
@@ -103,6 +113,7 @@ public class Coordonnateur {
         }
     }
 
+    // 4 TODO Completed : Coordonnateur Creation Categorie
     public void createCategorie(String category) throws CategoryAlreadyExistExeception {
         category = category.toLowerCase();
         boolean isCategory = facadeApplication.createCategorie(category);
@@ -112,6 +123,7 @@ public class Coordonnateur {
         }
     }
 
+     // 3 TODO Completed Coordonnateur Assignation Usager Technique Projet
     public void createAssignationProjet(String nomProjet, String emailUsagerTechnique) throws ProjetNotAssignableToUserExeception {
         boolean isEmailValid = facadeApplication.isEmailInEnRegistre(emailUsagerTechnique);
         boolean isProjetValid = facadeApplication.isProjetDuplicated(nomProjet);
@@ -139,6 +151,7 @@ public class Coordonnateur {
      * @param choix
      * @throws UserNotVaildExeption
      */
+    // 8 TODO Completed : Coordonnateur Consulter Liste Billets
     public List<BilletDTO> consulterListeBillet(String valeur, int choix) throws FiltreNotValidException {
 
         Filtre filtre = Filtre.fromId(choix);
@@ -153,6 +166,7 @@ public class Coordonnateur {
         return listFiltreDTO;
     }
 
+    // 6 TODO Completed : Coordonnateur Assignation Billet
     public void createAssignationBillet(int idBillet, String emailUsagerTechique) throws BilletNotExistException,
             UserNotVaildExeption, AssignationBIlletException {
 
@@ -172,6 +186,7 @@ public class Coordonnateur {
         }
     }
 
+    // 7 TODO Completed : Coordonnateur Changeer etat Billet
     public void updateEtatBillet(int idBillet, int choixEtat, String emailUsager, String note) throws BilletNotExistException, StateNotValidException, UserNotVaildExeption {
 
         FiltreEtatBillet filtreEtatBillet = FiltreEtatBillet.fromId(choixEtat);
@@ -197,6 +212,7 @@ public class Coordonnateur {
         }
     }
 
+     // 9 TODO Completed : Menu Consulter Billet par Id
     public BilletDTO consulterDetailBilletParId(int idBillet) throws BilletNotExistException {
 
         boolean isBilletExist = facadeApplication.isBilletExist(idBillet);

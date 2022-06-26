@@ -10,5 +10,5 @@ import java.util.List;
  *
  */
 public class ChoixEtat {
-    public static final List<Integer> optionsEtat = Arrays.asList(1,2,3,4);
+    public static final List<Integer> optionsEtat = Arrays.asList(1,2,3,4,5);
 }

@@ -51,6 +51,7 @@ public class RegistreBillet {
     }
 
 
+
     public  List<Billet> filtreBillet (Filtre filtre, String inputUtilisateur) {
         List<Billet> listARetourner = new ArrayList<>();
         switch (filtre) {

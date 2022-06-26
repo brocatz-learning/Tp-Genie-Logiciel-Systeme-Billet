@@ -305,7 +305,7 @@ class CoordonnateurTest {
     }
 
     @Test
-    void createAssignationProjet() throws BilletNotExistException, AssignationBIlletException, UserNotVaildExeption, FiltreNotValidException {
+    void createAssignationBillet() throws BilletNotExistException, AssignationBIlletException, UserNotVaildExeption, FiltreNotValidException {
 
         int idBillet = 1;
         String email = "yoyo@gmail.com";

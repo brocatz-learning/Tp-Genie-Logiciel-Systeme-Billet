@@ -15,7 +15,12 @@ import utile.ConsoleColors;
 import java.util.List;
 import java.util.Scanner;
 
-import static model.dataModel.Filtre.Etat;
+/**
+ * Couche presentation pour la gestion du systeme de billet
+ *
+ * @author Maxi
+ */
+
 
 public class Presentation {
 
@@ -181,7 +186,7 @@ public class Presentation {
 
     }
 
-    // 3 TODO Completed Menu Creation Completed
+    // 3 TODO Completed Menu Assignation Usager Technique Projet
     // 3 Assigner un usager technique a un projet
 
     public static void afficherMenuAssignationUsagerTechniqueProjet() {
@@ -320,7 +325,7 @@ public class Presentation {
 
     }
 
-    // 6
+    // 6 TODO Completed : Menu Assignation Billet
     public static void afficherMenuAssignationBillet () {
         System.out.println("Menu assignation d'un billet a un usager technique");
         System.out.println("--------------------------------------");
@@ -353,7 +358,7 @@ public class Presentation {
         }
     }
 
-    // 7 Changer l'etat d'un billet
+    // 7 TODO Completed : Menu Liste Changeer etat Billet
     public static void afficherMenuChangerEtatBillet () {
         System.out.println("Menu changement d'etat d'un billet");
         System.out.println("--------------------------------------");
@@ -391,9 +396,13 @@ public class Presentation {
         while (!ChoixEtat.optionsEtat.contains(choixEtat)) {
             if (!scanner.hasNextInt()) {
                 System.out.println( ConsoleColors.RED + "\nErreur veuillez entrez une valeur numeric entre 1 et 5\n" + ConsoleColors.RESET);
-                scanner.nextLine();
+                scanner.next();
             } else {
                 choixEtat = scanner.nextInt();
+
+                if (!ChoixEtat.optionsEtat.contains(choixEtat)) {
+                    System.out.println( ConsoleColors.RED + "\nErreur veuillez entrez une option entre 1 et 5\n" + ConsoleColors.RESET);
+                }
             }
         }
 
@@ -408,7 +417,7 @@ public class Presentation {
 
     }
 
-    // 8 Consulter la liste des billets
+    // 8 TODO Completed : Menu Consulter Liste Billets
     public static void afficherMenuConsulterListeBillet () {
         System.out.println("Menu consulter la liste des billets");
         System.out.println("--------------------------------------");
@@ -463,7 +472,7 @@ public class Presentation {
     }
 
 
-    // 9 Consulter la liste des billets
+    // 9 TODO Completed : Menu Consulter Billet par Id
 
     public static void afficherMenuConsulterDetailBilletParId () {
         System.out.println("Menu consulter le detail d'un billet par id");
