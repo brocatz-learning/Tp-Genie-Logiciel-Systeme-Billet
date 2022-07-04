@@ -49,7 +49,7 @@ public class RegistreUsager {
         return this.listUsager.size();
     }
 
-    public boolean validationChampUsager(Usager usager)  {
+    private boolean validationChampUsager(Usager usager)  {
         // Validation Enmail
         boolean isUserValide = true;
 

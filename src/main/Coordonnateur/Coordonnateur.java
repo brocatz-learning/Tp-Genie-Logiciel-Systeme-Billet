@@ -32,7 +32,9 @@ public class Coordonnateur {
     public void createUsager (UsagerDTO usagerDTO, int choixResponse) throws UserNotVaildExeption {
         ValidationUsager.validationUsagerDTO(usagerDTO);
 
-        boolean isEmailDuplicated = facadeApplication.isEmailDuplicated(usagerDTO.getEmail());
+        //boolean isEmailDuplicated = facadeApplication.isEmailDuplicated(usagerDTO.getEmail());
+        boolean isEmailDuplicated = facadeApplication.isEmailInEnRegistre(usagerDTO.getEmail());
+
         if (isEmailDuplicated) {
             throw new UserNotVaildExeption("Email dupliqué");
         }

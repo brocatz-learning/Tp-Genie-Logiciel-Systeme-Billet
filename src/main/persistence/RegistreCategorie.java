@@ -38,7 +38,7 @@ public class RegistreCategorie {
         return listCategorie.contains(categorie.toLowerCase());
     }
 
-    public List<String> getListCategorie() {
+    private List<String> getListCategorie() {
         return new ArrayList<String>(listCategorie);
     }
 
