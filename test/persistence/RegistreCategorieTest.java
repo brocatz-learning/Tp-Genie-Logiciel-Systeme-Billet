@@ -40,6 +40,8 @@ class RegistreCategorieTest {
     @Test
     void clear() {
         RegistreCategorie registreCategorie = RegistreCategorie.getInstance();
+        registreCategorie.clear();
+        assertEquals(3, registreCategorie.getSize());
 
     }
 }
